@@ -1,5 +1,3 @@
-# >>>Files_Not_For_Share.gitignore Begin<<<
-
 # Office files
 *.zip
 *.rar
@@ -10,17 +8,22 @@
 *.xls
 *.xlsx
 
-# PDF files
+# >>>Files_Not_For_Share.gitignore Begin<<<
+First/
+Second/
 Third/Fall/CG/*.pdf
 Third/Fall/CN/**/*.pdf
 Third/Fall/IoT/**/*.pdf
 Third/Fall/OS/**/*.pdf
 Third/Fall/OS/OS-Code
+Third/雅思
+other/
+CommunistFiles/
+/*.pdf
 
 # >>>Files_Not_For_Share.gitignore End<<<
 
 # >>>C++.gitignore Begin<<<
-
 # Prerequisites
 *.d
 
