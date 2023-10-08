@@ -1,3 +1,26 @@
+# >>>Files_Not_For_Share.gitignore Begin<<<
+
+# Office files
+*.zip
+*.rar
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.xls
+*.xlsx
+
+# PDF files
+Third/Fall/CG/*.pdf
+Third/Fall/CN/**/*.pdf
+Third/Fall/IoT/**/*.pdf
+Third/Fall/OS/**/*.pdf
+Third/Fall/OS/OS-Code
+
+# >>>Files_Not_For_Share.gitignore End<<<
+
+# >>>C++.gitignore Begin<<<
+
 # Prerequisites
 *.d
 
@@ -30,3 +53,5 @@
 *.exe
 *.out
 *.app
+
+# >>>C++.gitignore End<<<
