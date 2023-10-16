@@ -1,13 +1,3 @@
-# Office files
-*.zip
-*.rar
-*.ppt
-*.pptx
-*.doc
-*.docx
-*.xls
-*.xlsx
-
 # >>>Files_Not_For_Share.gitignore Begin<<<
 First/
 Second/Fall
@@ -25,6 +15,27 @@ CommunistFiles/
 /*.pdf
 
 # >>>Files_Not_For_Share.gitignore End<<<
+
+# Office files
+*.zip
+*.rar
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.xls
+*.xlsx
+
+# >>>Obsdian.gitignore Begin<<<
+# to exclude workspace cache
+.obsidian/workspace.json
+
+# to exclude workspace cache specific to mobile devices
+.obsidian/workspace-mobile.json
+
+.obsidian/core-plugins.json
+
+# >>>Obsdian.gitignore End<<<
 
 # >>>C++.gitignore Begin<<<
 # Prerequisites
