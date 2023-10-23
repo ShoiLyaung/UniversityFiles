@@ -1,0 +1,11 @@
+{
+  "accentColor": "",
+  "baseFontSize": 16,
+  "theme": "system",
+  "cssTheme": "Obsidian Nord",
+  "translucency": false,
+  "nativeMenus": true,
+  "enabledCssSnippets": [
+    "fix_overline"
+  ]
+}
