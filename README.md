@@ -3,8 +3,8 @@
 
 3. 大三（[2023-2024学年校历](2023-2024学年校历.pdf)）
 	- [秋季](Third/Fall/README.md)
-		- [OS](Third/Fall/OS/README)
-		- [IoT](Third/Fall/IoT/README)
+		- [OS](Third/Fall/OS/README.md)
+		- [IoT](Third/Fall/IoT/README.md)
 		- [CN](Third/Fall/CN/README.md)
 	- [冬季](Third/Winter/README.md)
 
