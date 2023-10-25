@@ -1,5 +1,14 @@
 {
   "promptDelete": false,
   "alwaysUpdateLinks": true,
-  "strictLineBreaks": true
+  "strictLineBreaks": true,
+  "newFileLocation": "current",
+  "newLinkFormat": "shortest",
+  "useMarkdownLinks": true,
+  "showUnsupportedFiles": true,
+  "attachmentFolderPath": "./",
+  "userIgnoreFilters": [
+    "CommunistFiles/",
+    "other/"
+  ]
 }

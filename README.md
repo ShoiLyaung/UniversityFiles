@@ -5,7 +5,7 @@
 	- 秋季
 		- [[Third/Fall/OS/README|OS]]
 		- [[Third/Fall/IoT/README|IoT]]
-		- [[Third/Fall/CN/README|CN]]
+		- [CN]()
 	- 冬季
 	- [[2023-2024学年校历.pdf]]
 
