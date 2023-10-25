@@ -10,9 +10,9 @@
 
 - [考试](考试.md)
 
-- [Lab](Third/Fall/OS/Lab/README.md)
-	1. [week1](week1.md)
-	2. [week2](week2.md)
-	7. [week7](Lab/week7/README.md)
-	8. [week8](Lab/week8/README.md)
-	9. [week9](Lab/week9/README.md)
+- [Lab](Lab/README.md)
+	1. [week1](Lab/week1.md)
+	2. [week2](Lab/week2.md)
+	3. [week7](Lab/week7/README.md)
+	4. [week8](Lab/week8/README.md)
+	5. [week9](Lab/week9/README.md)
