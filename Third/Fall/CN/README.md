@@ -10,8 +10,8 @@
 5. [第五章 运输层](第五章%20运输层.md)
 6. 第六章 应用层
 
-- [README](Third/Fall/CN/Lab/README.md)
-- 
+- [Lab](Lab/README.md)
+
 ***
 ## 分数
 - 4-5课后作业
