@@ -1,0 +1,92 @@
+# >>>Files_Not_For_Share.gitignore Begin<<<
+First/
+Second/Fall
+Second/Winter
+Second/Spring
+Second/Summer
+Third/Fall/CG/*.pdf
+Third/Fall/CN/**/*.pdf
+Third/Fall/IoT/referance
+Third/Fall/IoT/ElasticTrainer
+Third/Fall/OS/**/*.pdf
+Third/Fall/OS/OS-Code
+Third/Fall/团推优
+Third/雅思
+other/
+CommunistFiles/
+/*.pdf
+
+# >>>Files_Not_For_Share.gitignore End<<<
+
+# Office files
+*.zip
+*.rar
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.xls
+*.xlsx
+
+# >>>Obsdian.gitignore Begin<<<
+.trash/
+# to exclude workspace cache
+.obsidian/workspace.json
+
+# to exclude workspace cache specific to mobile devices
+.obsidian/workspace-mobile.json
+.obsidian/core-plugins.json
+
+# >>>Obsdian.gitignore End<<<
+
+# >>>C++.gitignore Begin<<<
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# >>>C++.gitignore End<<<
+
+# >>>VisualStudioCode.gitignore Begin<<<
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# >>>VisualStudioCode.gitignore End<<<
