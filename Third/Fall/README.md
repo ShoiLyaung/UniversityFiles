@@ -1,4 +1,4 @@
-- [OS](Third/Fall/OS/README.md)
-- [IoT](Third/Fall/IoT/README.md)
-- [CN](Third/Fall/CN/README.md)
-- [课表](Third/Fall/课表.pdf)
+- [OS](OS/README.md)
+- [IoT](IoT/README.md)
+- [CN](CN/README.md)
+- [课表](课表.pdf)

@@ -3,7 +3,7 @@
   "alwaysUpdateLinks": true,
   "strictLineBreaks": true,
   "newFileLocation": "current",
-  "newLinkFormat": "shortest",
+  "newLinkFormat": "relative",
   "useMarkdownLinks": true,
   "showUnsupportedFiles": true,
   "attachmentFolderPath": "./",
