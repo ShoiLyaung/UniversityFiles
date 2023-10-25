@@ -1,4 +1,0 @@
-- [[Third/Fall/OS/README|OS]]
-- [[Third/Fall/IoT/README|IoT]]
-- [[Third/Fall/CN/README|CN]]
-- [[课表.pdf]]

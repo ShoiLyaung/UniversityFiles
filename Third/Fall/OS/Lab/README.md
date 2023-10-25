@@ -1,5 +1,0 @@
-1. [[week1]]
-2. [[week2]]
-7. [[Third/Fall/OS/Lab/week7/README|week7]]
-8. [[Third/Fall/OS/Lab/week8/README|week8]]
-9. [[Third/Fall/OS/Lab/week9/README|week9]]
