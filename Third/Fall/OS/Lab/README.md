@@ -1,5 +1,5 @@
 1. [week1](week1.md)
 2. [week2](week2.md)
-7. [README](Third/Fall/OS/Lab/week7/README.md)
-8. [README](Third/Fall/OS/Lab/week8/README.md)
-9. [README](Third/Fall/OS/Lab/week9/README.md)
+7. [README](week7/README.md)
+8. [README](week8/README.md)
+9. [README](week9/README.md)
