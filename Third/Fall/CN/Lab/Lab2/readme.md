@@ -31,44 +31,26 @@
 
 ### 本地
 
-
-
-![image-20230925205455485](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20230925205455485.png)
-
-
+![](img/image-20230925205455485.png)
 
 ### 服务器
 
-![image-20230926183010807](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20230926183010807.png)
-
-
+![](img/image-20230926183010807.png)
 
 ## TCP
-
-
 
 ### 客户端请求结果
 
 1. 请求文件不存在
 
-
-
-![image-20230926200320060](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20230926200320060.png)
-
-
+![](img/image-20230926200320060.png)
 
 1. 请求文件存在
 
-
-
-![image-20230926200400347](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20230926200400347.png)
-
-
+![](img/image-20230926200400347.png)
 
 ### 浏览器访问结果
 
-![image-20230926200113568](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20230926200113568.png)
-
-
+![](img/image-20230926200113568.png)
 
 > 将服务端放在远程主机上运行结果相同，但需注意远程主机需开放防火墙8080端口
