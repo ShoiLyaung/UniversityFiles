@@ -1,0 +1,3 @@
+- `mpicc hello_c.c -o hello_c`
+- `mpirun --allow-run-as-root -np 4 hello_c`
+- `mpicc ring_c.c -o ring_c`
