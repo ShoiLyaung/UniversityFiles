@@ -18,9 +18,13 @@ CommunistFiles/
 
 # >>>Files_Not_For_Share.gitignore End<<<
 
-# Office files
 *.zip
 *.rar
+*.7z
+*.tar
+*.gz
+
+# Office files
 *.ppt
 *.pptx
 *.doc
