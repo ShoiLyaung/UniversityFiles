@@ -1,0 +1,32 @@
+### 资料
+courseware
+# others
+*.rar
+*.zip
+*.pdf
+*.docx
+.DS_Store
+
+### C++
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Executables
+*.exe
+.*
+!/.gitignore
+**/build/
+**/cmake-build-debug/
+CMakeSettings.json
+
+# Intellij
+*.ipr
+*.iml
+*.iws
+**/.idea/
+
+# VSCode
+.vscode/

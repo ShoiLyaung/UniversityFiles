@@ -76,10 +76,10 @@ CommunistFiles/
 # >>>C++.gitignore End<<<
 
 # >>>VisualStudioCode.gitignore Begin<<<
-.vscode/
+**/.vscode/
 
 # Local History for Visual Studio Code
-.history/
+**/.history/
 
 # Built Visual Studio Code Extensions
 *.vsix
