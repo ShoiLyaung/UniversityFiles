@@ -18,15 +18,4 @@ courseware
 *.exe
 .*
 !/.gitignore
-**/build/
-**/cmake-build-debug/
 CMakeSettings.json
-
-# Intellij
-*.ipr
-*.iml
-*.iws
-**/.idea/
-
-# VSCode
-.vscode/

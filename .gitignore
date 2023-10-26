@@ -15,15 +15,22 @@ Third/雅思
 other/
 CommunistFiles/
 /*.pdf
-
 # >>>Files_Not_For_Share.gitignore End<<<
+
+# >>>Obsdian.gitignore Begin<<<
+.trash/
+# to exclude workspace cache
+.obsidian/workspace.json
+# to exclude workspace cache specific to mobile devices
+.obsidian/workspace-mobile.json
+.obsidian/core-plugins.json
+# >>>Obsdian.gitignore End<<<
 
 *.zip
 *.rar
 *.7z
 *.tar
 *.gz
-
 # Office files
 *.ppt
 *.pptx
@@ -32,60 +39,48 @@ CommunistFiles/
 *.xls
 *.xlsx
 
-# >>>Obsdian.gitignore Begin<<<
-.trash/
-# to exclude workspace cache
-.obsidian/workspace.json
-
-# to exclude workspace cache specific to mobile devices
-.obsidian/workspace-mobile.json
-.obsidian/core-plugins.json
-
-# >>>Obsdian.gitignore End<<<
-
 # >>>C++.gitignore Begin<<<
 # Prerequisites
 *.d
-
 # Compiled Object files
 *.slo
 *.lo
 *.o
 *.obj
-
 # Precompiled Headers
 *.gch
 *.pch
-
 # Compiled Dynamic libraries
 *.so
 *.dylib
 *.dll
-
 # Fortran module files
 *.mod
 *.smod
-
 # Compiled Static libraries
 *.lai
 *.la
 *.a
 *.lib
-
 # Executables
 *.exe
 *.out
 *.app
-
 # >>>C++.gitignore End<<<
 
 # >>>VisualStudioCode.gitignore Begin<<<
 **/.vscode/
-
 # Local History for Visual Studio Code
 **/.history/
-
 # Built Visual Studio Code Extensions
 *.vsix
-
 # >>>VisualStudioCode.gitignore End<<<
+
+# >>>Intellij.gitignore Begin<<<
+*.ipr
+*.iml
+*.iws
+**/.idea/
+**/build/
+**/cmake-build-debug/
+# >>>Intellij.gitignore End<<<
