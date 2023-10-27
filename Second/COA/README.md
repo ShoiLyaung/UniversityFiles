@@ -7,7 +7,7 @@
 - 作业 20%
 - 实验 60%
 ### 期末 70%
-- [University/Second/Winter/COA/考试&复习](University/Second/Winter/COA/考试&复习)
+- [考试&复习](考试&复习.md)
 ***
 - 计算机的内部工作原理
 - 计算机内部运行机制
