@@ -4,7 +4,3 @@
 - [机器学习基础](ML/README.md)
 - [英语口语](英语口语/README.md)
 
-```dataview
-list
-from "Third/Winter"
-```
