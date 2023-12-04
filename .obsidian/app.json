@@ -5,12 +5,13 @@
   "newFileLocation": "current",
   "newLinkFormat": "relative",
   "useMarkdownLinks": true,
-  "showUnsupportedFiles": false,
+  "showUnsupportedFiles": true,
   "attachmentFolderPath": "./",
   "userIgnoreFilters": [
     "CommunistFiles/",
     "other/",
     "First/",
     "Second/"
-  ]
+  ],
+  "livePreview": false
 }
