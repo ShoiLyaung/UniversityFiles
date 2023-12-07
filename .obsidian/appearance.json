@@ -2,10 +2,11 @@
   "accentColor": "",
   "baseFontSize": 16,
   "theme": "system",
-  "cssTheme": "Obsidian Nord",
+  "cssTheme": "Atom",
   "translucency": false,
   "nativeMenus": true,
   "enabledCssSnippets": [
     "fix_overline"
-  ]
+  ],
+  "monospaceFontFamily": "MesloLGS NF"
 }
