@@ -2,7 +2,7 @@
   "accentColor": "",
   "baseFontSize": 16,
   "theme": "system",
-  "cssTheme": "Atom",
+  "cssTheme": "Minimal",
   "translucency": false,
   "nativeMenus": true,
   "enabledCssSnippets": [

@@ -42,3 +42,17 @@ $$
 ### 3.4.2 非参数估计2—$k_N$ 近邻估计方法
 
 ## 分类器错误率问题
+
+###  分类器性能的度量指标
+分类器的度量指标是用来评估分类器在处理数据时表现的好坏程度的标准
+
+混淆矩阵
+- TPR(True Positive Rate)真正例率/召回率/灵敏度
+- TRR(True Reject Rate)正确拒绝的比例/特异率
+两类错误率
+- FPR(False Positive Rate)第一类错误率/假正例率/错误接受率
+- FRR(False Reject Rate)第二类错误率/错误拒绝率
+- F1
+- ROC
+- AUC
+
