@@ -1,0 +1,3 @@
+- 10 minutes pre group
+- no video
+- PPT(optional)
