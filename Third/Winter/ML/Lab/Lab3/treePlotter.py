@@ -69,7 +69,8 @@ def createPlot(inTree):
     plotTree.totalD = float(getTreeDepth(inTree))
     plotTree.xOff = -0.5/plotTree.totalW; plotTree.yOff = 1.0;
     plotTree(inTree, (0.5,1.0), '')
-    plt.show()
+    # plt.show()
+    return fig
 
 #def createPlot():
 #    fig = plt.figure(1, facecolor='white')
