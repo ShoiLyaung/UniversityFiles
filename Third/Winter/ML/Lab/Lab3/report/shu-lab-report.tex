@@ -58,32 +58,195 @@
 \setcounter{page}{1}
 
 \section{实验目的与要求}
-目的：
+目的：熟悉和构建基于决策树分类
 
-内容：
+内容：利用决策树进行数据分类，同时输出决策树构建过程，分析每次为什么选取该特征进行分类
 
 
 \section{实验环境}
-python, scikit-learn
+\textbf{工具}: python, matplotlib
+
+\textbf{数据集}: 隐形眼镜数据集是非常著名的数据集，它包含很多换着眼部状态的观察条件以及医生推荐的隐形眼镜类型。
+隐形眼镜类型包括硬材质(hard)、软材质(soft)以及不适合佩戴隐形眼镜(no lenses)。
+数据集一共有24组数据，数据的Labels依次是age、prescript、astigmatic、tearRate、class，也就是第一列是年龄，
+第二列是症状，第三列是是否散光，第四列是眼泪数量，第五列是最终的分类标签。
+
 
 \section{实验内容及其设计与实现}
+在本实验中，决策树中的特征选择基于信息增益，而这种决策树就是ID3树。
+ID3作为一种经典的决策树算法，是基于信息熵来选择最佳的测试属性，
+其选择了当前样本集中具有最大信息增益值的属性作为测试属性。
+样本集的划分则依据了测试属性的取值进行，
+测试属性有多少种取值就能划分出多少的子样本集；
+同时决策树上与该样本集相应的节点长出新的叶子节点。
+ID3算法根据信息论理论，采用划分后样本集的不确定性作为衡量划分样本子集的好坏程度，
+用“信息增益值”度量不确定性——信息增益值越大，
+不确定性就更小，这就促使我们找到一个好的非叶子节点来进行划分。
 
 \subsection{实验内容1}
 \subsubsection{算法原理}
+ID3采用信息增益作为准则来划分属性。它的划分是一个递归过程，可以分为以下几步：
+\begin{enumerate}
+    \item 设置信息增益的阈值。
+    \item 选择信息增益最大的特征A。
+    \item 如果特征A的信息增益小于阈值A，则返回单节点树。采用投票法，该结点的类型为样本数量最多的类别。
+    \item 否则，按照特征A将节点划分为多棵子树，返回增加了子节点的节点。
+    \item 对各个子节点，递归调用上述步骤，直到达到停止标准（树的深度、信息增益阈值或者没有样本可划分）
+\end{enumerate}
+
+其中，假设样本集合$D$共有$N$类，第$k$类样本所占比例为$P_k$，则$D$的信息熵为：
+\begin{equation}
+\label{eq:entropy}
+H(D) = -\sum_{k=1}^K P_k \log_2 P_k
+\end{equation}
+
+条件熵为：
+\begin{equation}
+\label{eq:cond_entropy}
+H(D|A) = -\sum_{k=1}
+\sum_{i=1}^N P_k(i) \log_2 P_k(i)
+\end{equation}
+信息增益为：
+\begin{equation}
+\label{eq:gain}
+g(D,A) =
+H(D) - H(D|A)
+\end{equation}
 
 \subsubsection{代码及结果}
+首先定义calcShannonEnt(dataSet)函数，
+传入数据集，返回香农熵。
+\begin{lstlisting}[language=Python, caption={计算香农熵的函数}, label={code:entropy}]
+def calcShannonEnt(dataSet):
+    numEntries = len(dataSet)
+    labelCounts = {}
+    for featVec in dataSet: #the the number of unique elements and their occurance
+        currentLabel = featVec[-1]
+        if currentLabel not in labelCounts.keys(): labelCounts[currentLabel] = 0
+        labelCounts[currentLabel] += 1
+    shannonEnt = 0.0
+    for key in labelCounts:
+        prob = float(labelCounts[key])/numEntries
+        shannonEnt -= prob * log(prob,2) #log base 2
+    return shannonEnt
+\end{lstlisting}
 
-\subsection{实验内容2}
+定义splitDataSet(dataSet, axis, value)函数，
+传入数据集，特征轴，特征值，通过切片返回特征值等于特征值的子数据集。
+\begin{lstlisting}[language=Python, caption={划分数据集的函数}, label={code:split}]
+def splitDataSet(dataSet, axis, value):
+    retDataSet = []
+    for featVec in dataSet:
+        if featVec[axis] == value:
+            reducedFeatVec = featVec[:axis]     #chop out axis used for splitting
+            reducedFeatVec.extend(featVec[axis+1:])
+            retDataSet.append(reducedFeatVec)
+    return retDataSet
+\end{lstlisting}
 
-\subsubsection{代码及结果}
+定义了chooseBestFeatureToSplit(dataSet)函数，选择当前的最优特征。
+首先计算出数据集的信息熵，然后遍历特征，
+对每一个特征构造一个单独的列表来储存所有样本点中关于这个特征的值，
+来得到当前特征和之前信息熵最大的特征的信息增益。
+最后选择信息增益最大的特征返回。
+\begin{lstlisting}[language=Python, caption={选择最佳特征的函数}, label={code:choose}]
+def chooseBestFeatureToSplit(dataSet):
+    numFeatures = len(dataSet[0]) - 1      
+    baseEntropy = calcShannonEnt(dataSet)
+    bestInfoGain = 0.0; bestFeature = -1
+    for i in range(numFeatures):        
+        featList = [example[i] for example in dataSet]#create a list of all the examples of this feature
+        uniqueVals = set(featList)      
+        newEntropy = 0.0
+        for value in uniqueVals:
+            subDataSet = splitDataSet(dataSet, i, value)
+            prob = len(subDataSet)/float(len(dataSet))
+            newEntropy += prob * calcShannonEnt(subDataSet)     
+        infoGain = baseEntropy - newEntropy     
+        if (infoGain > bestInfoGain):       
+            bestInfoGain = infoGain         
+            bestFeature = i
+    return bestFeature                      
+\end{lstlisting}
 
-\subsection{实验内容3}
-\subsubsection{算法原理}
+之后，我创建了决策树模型，传入数据集和标签。
+首先，对于每一个样本，我将其最后一个值，即分类结果放入classList中。
+这里，我设置了两个递归结束条件：
+程序遍历完所有划分数据集的属性，或者每个分支下的所有实例都具有相同的分类。
+之后，找到当前信息增益最大的特征，
+按照特征将节点划分为多棵子树，最后返回决策树。
+\begin{lstlisting}[language=Python, caption={决策树模型}, label={code:tree}]
+def majorityCnt(classList):
+    classCount={}
+    for vote in classList:
+        if vote not in classCount.keys(): classCount[vote] = 0
+        classCount[vote] += 1
+    sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
+    return sortedClassCount[0][0]
+\end{lstlisting}
+\begin{lstlisting}[language=Python, caption={决策树模型}, label={code:tree}]
+def createTree(dataSet,labels):
+    classList = [example[-1] for example in dataSet]
+    if classList.count(classList[0]) == len(classList): 
+        return classList[0]
+    if len(dataSet[0]) == 1:
+        return majorityCnt(classList)
+    bestFeat = chooseBestFeatureToSplit(dataSet)
+    bestFeatLabel = labels[bestFeat]
+    myTree = {bestFeatLabel:{}}
+    del(labels[bestFeat])
+    featValues = [example[bestFeat] for example in dataSet]
+    uniqueVals = set(featValues)
+    for value in uniqueVals:
+        subLabels = labels[:]       
+        myTree[bestFeatLabel][value] = createTree(splitDataSet(dataSet, bestFeat, value),subLabels)
+    return myTree
+\end{lstlisting}
 
-\subsubsection{代码及结果}
+最后，定义classify(inputTree, featLabels, testVec)函数使用决策树进行分类。
+其中，inputTree是已经生成的决策树，featLabels是存储选择的最优特征标签，
+testVec是测试数据列表，顺序对应最优特征标签。
+\begin{lstlisting}[language=Python, caption={分类函数}, label={code:classify}]
+def classify(inputTree,featLabels,testVec):
+    firstStr = inputTree.keys()[0]
+    secondDict = inputTree[firstStr]
+    featIndex = featLabels.index(firstStr)
+    key = testVec[featIndex]
+    valueOfFeat = secondDict[key]
+    if isinstance(valueOfFeat, dict): 
+        classLabel = classify(valueOfFeat, featLabels, testVec)
+    else: classLabel = valueOfFeat
+    return classLabel
+\end{lstlisting}
+
+首先，将数据导入，对于文件的每一行，先用strip()函数去除换行符，
+再用split()函数进行分割，返回特征矩阵和特征名列表。
+最后，调用之前定义的createTree函数即可构造出决策树。
+\begin{lstlisting}[language=Python, caption={主函数}, label={code:main}]
+import trees
+import treePlotter
+
+fr=open('lenses.txt')
+lenses=[inst.strip().split('\t') for inst in fr.readlines()]
+lensesLabels=['age','prescript','astigmatic','tearRate']
+lensesTree=trees.createTree(lenses,lensesLabels)
+# treePlotter.createPlot(lensesTree)
+img=treePlotter.createPlot(lensesTree)
+img.savefig('lensesTree.png')
+\end{lstlisting}
+
+可视化决策树结果：
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{image/lensesTree.png}
+    \caption{决策树可视化}
+    \label{fig:lensesTree}
+\end{figure}
+
 
 \section{总结与体会}
-通过本次实验，
+通过本次实验，我了解了决策树的构造过程，以及决策树可视化的方法。
+学习掌握了ID3决策树算法。
 
 \end{document}
 
