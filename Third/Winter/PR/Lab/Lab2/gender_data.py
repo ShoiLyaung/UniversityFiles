@@ -10,32 +10,37 @@ def read_data_from(folder_path = 'genderdata'):
     """
     excel_dataframes = []
     txt_dataframes = []
-
+    year = ''
+    gender = ''
     # 从Excel文件夹读取数据
     for excel_file in os.listdir(folder_path):
         if excel_file.endswith('.xlsx') and excel_file.startswith('202'):
             excel_file_path = os.path.join(folder_path, excel_file)
             excel_data = pd.read_excel(excel_file_path)
-            excel_dataframes.append(excel_data[['性别', '身高(cm)', '体重(kg)', '尺码']])
+            year = excel_file.split('.')[0][:4]
+            excel_data['年份'] = year
+            excel_dataframes.append(excel_data[['性别', '身高(cm)', '体重(kg)', '尺码', '年份']])
         elif excel_file=='boyandgirl2018.xlsx':
             excel_file_path = os.path.join(folder_path, excel_file)
             excel_data = pd.read_excel(excel_file_path)
             # excel_data = excel_data.dropna(subset=['性别'])
             excel_data = excel_data[excel_data['性别'].isin(['男', '女'])]
+            excel_data['年份'] = '2018'
             excel_data = excel_data.rename(columns={'身高（cm）': '身高(cm)', '体重（kg）': '体重(kg)', '鞋码': '尺码'})
-            excel_dataframes.append(excel_data[['性别', '身高(cm)', '体重(kg)', '尺码']])
+            excel_dataframes.append(excel_data[['性别', '身高(cm)', '体重(kg)', '尺码', '年份']])
     excel_data = pd.concat(excel_dataframes, ignore_index=True)
     
     # 从txt文件夹读取数据
     for txt_file in os.listdir(folder_path):
-        gender = '男'
         if txt_file.endswith('.txt'):
             txt_file_path = os.path.join(folder_path, txt_file)
+            year = txt_file.split('.')[0][-4:]
             if txt_file.startswith('boy'):
                 gender = '男'
             if txt_file.startswith('girl'):
                 gender = '女'
             txt_data = pd.read_csv(txt_file_path, sep='\s+', header=None, names=['身高(cm)', '体重(kg)', '尺码'], comment='#')
+            txt_data['年份'] = year
             txt_data['性别'] = gender
             txt_dataframes.append(txt_data)
     txt_data = pd.concat(txt_dataframes, ignore_index=True)
