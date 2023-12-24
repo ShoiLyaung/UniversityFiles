@@ -50,76 +50,51 @@ def read_data_from(folder_path = 'genderdata'):
     all_data['尺码'] = all_data['尺码'].round().astype(int)
     return all_data
 
-def visualize_data(data):
+def plot_histogram(data, color_by=None):
     """
-    可视化数据
-    :param data: 数据
+    绘制数据中特定列的直方图。
+
+    :param data: 包含数据的数据框。
+    :param color_by: 用于区分特定类别的可选参数（例如，性别或年份）。
+
+    Example usage:
+    :plot_histogram(data)
+    :plot_histogram(data, color_by='性别')
+    :plot_histogram(data, color_by='年份')
     """
-    plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
-    plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
-    # 可视化每个维度的直方图
-    plt.figure(figsize=(15, 10))
-    # 绘制身高的直方图
-    plt.subplot(2, 2, 1)
-    plt.hist(data['身高(cm)'], bins=20, color='blue', edgecolor='black')
-    plt.title('身高分布')
-    plt.xlabel('身高')
-    plt.ylabel('频数')
-    # 绘制体重的直方图
-    plt.subplot(2, 2, 2)
-    plt.hist(data['体重(kg)'], bins=20, color='green', edgecolor='black')
-    plt.title('体重分布')
-    plt.xlabel('体重')
-    plt.ylabel('频数')
-    # 绘制尺码的直方图
-    plt.subplot(2, 2, 3)
-    plt.hist(data['尺码'], color='orange', edgecolor='black')
-    plt.title('尺码分布')
-    plt.xlabel('尺码')
-    plt.ylabel('频数')
-    plt.tight_layout()
-    plt.show()
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    plt.rcParams['axes.unicode_minus'] = False
 
-    # 可视化每个维度的直方图，区分男女性别
     plt.figure(figsize=(15, 10))
-    # 绘制身高的直方图
-    plt.subplot(2, 2, 1)
-    for gender, color in [('男', 'blue'), ('女', 'pink')]:
-        gender_data = data[data['性别'] == gender]
-        plt.hist(gender_data['身高(cm)'], bins=20, color=color, edgecolor='black', alpha=0.7, label=gender)
-    plt.title('身高分布')
-    plt.xlabel('身高')
-    plt.ylabel('频数')
-    plt.legend()
-    # 绘制体重的直方图
-    plt.subplot(2, 2, 2)
-    for gender, color in [('男', 'blue'), ('女', 'pink')]:
-        gender_data = data[data['性别'] == gender]
-        plt.hist(gender_data['体重(kg)'], bins=20, color=color, edgecolor='black', alpha=0.7, label=gender)
-    plt.title('体重分布')
-    plt.xlabel('体重')
-    plt.ylabel('频数')
-    plt.legend()
-    # 绘制尺码的直方图
-    plt.subplot(2, 2, 3)
-    for gender, color in [('男', 'blue'), ('女', 'pink')]:
-        gender_data = data[data['性别'] == gender]
-        plt.hist(gender_data['尺码'], color=color, edgecolor='black', alpha=0.7, label=gender)
-    plt.title('尺码分布')
-    plt.xlabel('尺码')
-    plt.ylabel('频数')
-    plt.legend()
-    plt.tight_layout()
-    plt.show()
 
-    # 可视化数据
-    plt.figure(figsize=(10, 6))
-    # 绘制所有数据
-    for gender, color, marker in [('男', 'blue', 'x'), ('女', 'red', 's')]:
-        gender_data = data[data['性别'] == gender]
-        plt.scatter(gender_data['身高(cm)'], gender_data['体重(kg)'], label=f'所有数据 ({gender})', color=color, marker=marker)
-    plt.xlabel('身高')
-    plt.ylabel('体重')
-    plt.title('身高体重分布')
-    plt.legend()
+    if color_by is None:
+        color = ['blue', 'pink', 'red', 'orange', 'olive', 'cyan', 'green']
+        for i, column in enumerate(['身高(cm)', '体重(kg)', '尺码'], start=1):
+            plt.subplot(2, 2, i)
+            plt.hist(data[column], 
+                     bins=None if column == '尺码' else 20, 
+                     color=color[i], 
+                     edgecolor='black')
+            plt.title(f'{column}分布')
+            plt.xlabel(column)
+            plt.ylabel('频数')
+    else:
+        categories = data[color_by].unique()
+        color_mapping = {'男': 'blue', '女': 'pink', '2009': 'red', '2010': 'pink', '2011': 'orange', '2017': 'olive',
+                         '2018': 'cyan', '2021': 'blue', '2022': 'green'}  # Add more colors as needed
+        for i, column in enumerate(['身高(cm)', '体重(kg)', '尺码'], start=1):
+            plt.subplot(2, 2, i)
+            for category in categories:
+                category_data = data[data[color_by] == category]
+                plt.hist(category_data[column], 
+                         bins=None if column == '尺码' else 20, 
+                         color=color_mapping[category], 
+                         edgecolor='black',
+                         alpha=0.7, 
+                         label=category)
+            plt.title(f'{column}分布 - 区分{color_by}')
+            plt.xlabel(column)
+            plt.ylabel('频数')
+            plt.legend()
+    plt.tight_layout()
     plt.show()
