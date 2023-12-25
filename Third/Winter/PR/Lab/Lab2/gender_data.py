@@ -65,12 +65,12 @@ def plot_histogram(data, color_by=None):
     plt.rcParams['font.sans-serif'] = ['SimHei']
     plt.rcParams['axes.unicode_minus'] = False
 
-    plt.figure(figsize=(15, 10))
+    plt.figure(figsize=(14, 4))
 
     if color_by is None:
         color = ['blue', 'pink', 'red', 'orange', 'olive', 'cyan', 'green']
         for i, column in enumerate(['身高(cm)', '体重(kg)', '尺码'], start=1):
-            plt.subplot(2, 2, i)
+            plt.subplot(1, 3, i)
             plt.hist(data[column], 
                      bins=None if column == '尺码' else 20, 
                      color=color[i], 
@@ -83,7 +83,7 @@ def plot_histogram(data, color_by=None):
         color_mapping = {'男': 'blue', '女': 'pink', '2009': 'red', '2010': 'pink', '2011': 'orange', '2017': 'olive',
                          '2018': 'cyan', '2021': 'blue', '2022': 'green'}  # Add more colors as needed
         for i, column in enumerate(['身高(cm)', '体重(kg)', '尺码'], start=1):
-            plt.subplot(2, 2, i)
+            plt.subplot(1, 3, i)
             for category in categories:
                 category_data = data[data[color_by] == category]
                 plt.hist(category_data[column], 
