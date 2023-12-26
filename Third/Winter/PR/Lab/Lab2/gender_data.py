@@ -48,6 +48,7 @@ def read_data_from(folder_path = 'genderdata'):
     # 合并数据
     all_data = pd.concat([excel_data, txt_data], ignore_index=True)
     all_data['尺码'] = all_data['尺码'].round().astype(int)
+    all_data['gender'] = 1 * (all_data['性别'] == '男')
     return all_data
 
 def plot_histogram(data, color_by=None):

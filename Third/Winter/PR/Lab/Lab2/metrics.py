@@ -12,6 +12,7 @@ def get_metrics(true_labels, predicted_labels, predicted_score):
     print("ROC曲线下面积为: {}".format(metrics.roc_auc_score(true_labels, predicted_score)))
     # 绘制ROC曲线
     fpr, tpr, thresholds = metrics.roc_curve(true_labels, predicted_score)
+    plt.figure(figsize=(2, 2))
     plt.plot(fpr, tpr, label='ROC曲线')
     plt.plot([0, 1], [0, 1], linestyle='--', color='k', label='随机猜测')
     plt.xlabel('假正率')
@@ -20,5 +21,7 @@ def get_metrics(true_labels, predicted_labels, predicted_score):
     plt.legend()
     plt.show()
     print("-------------------------------------------------------------------------------")
-
-    
+ 
+def get_metrics_accuracy(true_labels, predicted_labels, predicted_score):
+    print("准确率为: {}".format(metrics.accuracy_score(true_labels, predicted_labels)))
+    print("-------------------------------------------------------------------------------")
