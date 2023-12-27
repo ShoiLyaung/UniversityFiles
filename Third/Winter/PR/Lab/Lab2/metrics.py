@@ -29,16 +29,27 @@ def get_metrics(true_labels, predicted_labels, predicted_score):
     print("混淆矩阵为:\n{}".format(conf_matrix))
     print("分类报告为:\n{}".format(cls_report)) 
     print("ROC曲线下面积为: {}".format(roc_auc_score))
-    # 绘制ROC曲线
-    plt.figure(figsize=(2, 2))
-    plt.plot(fpr, tpr, label='ROC曲线')
+    print("-------------------------------------------------------------------------------")
+    return fpr, tpr
+    
+def plot_roc_curves(metrics_list, labels_list):
+    plt.figure(figsize=(4, 4))
+    
+    for i, metrics_data in enumerate(metrics_list):
+        if metrics_data is not None:
+            fpr, tpr = metrics_data
+            label = labels_list[i]
+            plt.plot(fpr, tpr, label=f'ROC曲线 - {label}')
+        else:
+            print(f"Metrics data for label {labels_list[i]} is None.")
+
     plt.plot([0, 1], [0, 1], linestyle='--', color='k', label='随机猜测')
     plt.xlabel('假正率')
     plt.ylabel('真正率')
-    plt.title('ROC曲线')
+    plt.title('多组数据ROC曲线对比')
     plt.legend()
     plt.show()
-    print("-------------------------------------------------------------------------------")
+
  
 def get_metrics_accuracy(true_labels, predicted_labels, predicted_score):
     print("准确率为: {}".format(metrics.accuracy_score(true_labels, predicted_labels)))

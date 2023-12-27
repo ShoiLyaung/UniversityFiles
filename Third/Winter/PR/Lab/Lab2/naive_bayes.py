@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from mpl_toolkits.mplot3d import Axes3D
+from scipy.stats import multivariate_normal
 
 def gaussian_pdf(x , mean , std):
     '''
@@ -146,6 +148,34 @@ class MyGaussianNB:
         plt.xlabel('身高')
         plt.ylabel('体重')
         plt.title('决策边界')
+        plt.show()
+
+    def plot_3d_gaussian_grid(self, X, y, grid_resolution=100):
+        # Plot 3D Gaussian distributions with grid:
+        fig = plt.figure(figsize=(10, 8))
+        ax = fig.add_subplot(111, projection='3d')
+        h = .02  # 步长
+        x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+        y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+        xx, yy = np.meshgrid(np.linspace(x_min, x_max, grid_resolution),
+                             np.linspace(y_min, y_max, grid_resolution))
+        for class_label in np.unique(y):
+            class_data = X[y == class_label]
+            mean = np.mean(class_data, axis=0)
+            cov_matrix = np.cov(class_data.T)
+            mvn = multivariate_normal(mean=mean, cov=cov_matrix)
+            Z = mvn.pdf(np.c_[xx.ravel(), yy.ravel()])
+            Z = Z.reshape(xx.shape)
+            ax.plot_surface(xx, yy, Z, alpha=0.3, cmap='viridis', edgecolor='k', linewidth=0.5)
+        # Plot data points
+        # scatter = ax.scatter(X[:, 0], X[:, 1], zs=0, c=y, cmap='Set1', edgecolor='k', s=100)
+        # Adding axes annotations:
+        ax.set_xlabel('Feature 1')
+        ax.set_ylabel('Feature 2')
+        ax.set_zlabel('Density')
+        ax.set_title('3D Gaussian Distributions with Grid')
+        # Add color bar
+        # fig.colorbar(scatter, ax=ax, shrink=0.5, aspect=10)
         plt.show()
 
 # 定义Parzen窗法概率密度估计函数
