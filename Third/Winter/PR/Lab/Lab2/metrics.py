@@ -39,7 +39,7 @@ def plot_roc_curves(metrics_list, labels_list):
         if metrics_data is not None:
             fpr, tpr = metrics_data
             label = labels_list[i]
-            plt.plot(fpr, tpr, label=f'ROC曲线 - {label}')
+            plt.plot(fpr, tpr, label=f'{label}')
         else:
             print(f"Metrics data for label {labels_list[i]} is None.")
 

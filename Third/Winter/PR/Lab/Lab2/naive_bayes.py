@@ -43,6 +43,8 @@ def bayes_classifier_by(train_data, test_data, feature='身高(cm)', target='性
     posterior_prob_female = prior_prob_female * female_pdf
     # 进行分类
     predictions = np.where(posterior_prob_male > posterior_prob_female, '男', '女')
+    # for male_prob, female_prob, prediction in zip(posterior_prob_male, posterior_prob_female, predictions):
+    #     print("男性后验概率为{:.6f}，女性后验概率为{:.6f}，故预测结果为'{}'".format(male_prob, female_prob, prediction))
     return predictions
 
 def bayes_classifier_by_with_prob(train_data, test_data, feature='身高(cm)', target='性别', prior_prob_male=0.5):
