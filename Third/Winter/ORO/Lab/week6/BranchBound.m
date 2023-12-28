@@ -12,7 +12,7 @@ function [xstar, fxstar] = BranchBound1(A, b, c, vlb, vub, optXin, optF, iter)
     iter = iter + 1;
     optX = optXin; optVal = optF;
     
-    [x, fit, status] = linprog(c, A, b, [], [], vlb, vub);
+    [x, fit, status] = linprog(-c, A, b, [], [], vlb, vub);
     if status ~= 1
         xstar = x;
         fxstar = fit;
