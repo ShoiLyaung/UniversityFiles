@@ -117,17 +117,192 @@
 \end{enumerate}
 
 \subsubsection{代码及结果}
+对于单个特征的朴素贝叶斯分类器，假设每个特征都服从正态分布，根据正态分布的概率密度函数：
+\begin{equation}
+    f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\end{equation}
 
+计算出每个特征的均值和标准差，然后代入概率密度函数，计算出后验概率，进行分类。
+其代码如下所示。
+\begin{lstlisting}[language=Python, caption={朴素贝叶斯分类器}, label={code:naive_bayes}]
+    def gaussian_pdf(x , mean , std):
+    '''
+    正态分布概率密度函数
+    '''
+    prob_density = (1/std*np.sqrt(2*np.pi)) * np.exp(-((x - mean) ** 2) / (2 * std ** 2))
+    return prob_density
 
-\section{实验内容2~}
+def bayes_classifier_by(train_data, test_data, feature='身高(cm)', target='性别', prior_prob_male=0.5):
+    '''
+    单特征特征的Bayes分类器
+    '''
+    prior_prob_female= 1 - prior_prob_male
+    # 提取训练集中男女身高的均值和标准差
+    male_mean = train_data[train_data[target] == '男'][feature].mean()
+    male_std = train_data[train_data[target] == '男'][feature].std()
+    female_mean = train_data[train_data[target] == '女'][feature].mean()
+    female_std = train_data[train_data[target] == '女'][feature].std()
+    # 计算男女身高的概率密度函数
+    male_pdf = gaussian_pdf(test_data[feature], male_mean, male_std)
+    female_pdf = gaussian_pdf(test_data[feature], female_mean, female_std)
+    # 计算后验概率
+    posterior_prob_male = prior_prob_male * male_pdf
+    posterior_prob_female = prior_prob_female * female_pdf
+    # 进行分类
+    predictions = np.where(posterior_prob_male > posterior_prob_female, '男', '女')
+    return predictions
+
+\end{lstlisting}
+
+结果性能分析（以ROC曲线作为分析指标）如下：
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.3\textwidth]{image/single_feature_output.png}
+    \caption{不同特征ROC曲线}
+    \label{fig:roc}
+\end{figure}
+
+同时采用身高和体重数据作为特征，采用最小错误率原则进行分类，其代码如下所示。
+\begin{lstlisting}[language=Python, caption={最小错误率分类器}, label={code:minimum_error_rate}]
+    class MyGaussianNB:
+    def fit(self, X, y, prior_probs=None):
+        '''
+        训练
+        :param X:               训练集特征
+        :param y:               训练集标签
+        :param prior_probs:     先验概率
+        :return:                None
+        '''
+        self.classes, class_counts = np.unique(y, return_counts=True)
+        if prior_probs is not None:
+            prior_probs = {'男': prior_probs, '女': 1 - prior_probs}
+        else:
+            prior_probs = dict(zip(self.classes, class_counts / len(y)))
+        self.class_probs = np.array([prior_probs[class_label] for class_label in self.classes])
+        self.means = {}
+        self.stds = {}
+        for class_label in self.classes:
+            class_data = X[y == class_label]
+            self.means[class_label] = np.mean(class_data, axis=0)
+            self.stds[class_label] = np.std(class_data, axis=0)
+
+    def predict(self, X):
+        predictions = []
+        for x in X:
+            class_scores = []
+            for i, class_label in enumerate(self.classes):
+                prior_prob = np.log(self.class_probs[i])
+                mean = self.means[class_label]
+                std = self.stds[class_label]
+                likelihood = np.sum(-0.5 * ((x - mean) / std) ** 2 - np.log(np.sqrt(2 * np.pi) * std))
+                class_scores.append(prior_prob + likelihood)
+            predictions.append(self.classes[np.argmax(class_scores)])   #最大错误率
+        return np.array(predictions)
+    
+    def predict_proba(self, X):
+        '''
+        预测概率
+        :param X:   测试集特征
+        :return:    各类别的概率
+        '''
+        probas = []
+        for x in X:
+            class_probs = []
+            for i in range(len(self.classes)):
+                class_label = self.classes[i]
+                prior_prob = np.log(self.class_probs[i])
+                mean = self.means[class_label]
+                std = self.stds[class_label]
+                likelihood = np.sum(-0.5 * ((x - mean) / std) ** 2 - np.log(np.sqrt(2 * np.pi) * std))
+                class_probs.append(np.exp(prior_prob + likelihood))
+            class_probs /= np.sum(class_probs)  # Normalize to get probabilities
+            probas.append(class_probs)
+        return np.array(probas)
+\end{lstlisting}
+
+结果性能分析（以ROC曲线作为分析指标）如下：
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.4\textwidth]{image/multifeature.png}
+    \caption{多特征ROC曲线}
+    \label{fig:roc}
+\end{figure}
+
+三维高斯分布及决策面投影可视化：
+\begin{figure}[!htbp]
+    \centering
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=6cm]{image/3d.png}
+        \caption{三维高斯分布}
+    \end{minipage}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=6cm]{image/decision_boundary_output.png}
+        \caption{决策面投影}
+    \end{minipage}
+    \label{fig:visualizaion}
+\end{figure}
+
+\section{实验内容2~Parzen窗法}
 \subsection{算法原理}
+Parzen窗法是一种非参数密度估计方法，其基本思想是将一个窗函数放在每个样本点上，
+然后通过计算窗函数在各个样本点上的积分来估计概率密度函数。
+具体来说，Parzen窗法将样本点分为若干个矩形区域，然后计算每个区域内样本点的个数，
+最后通过这些个数来估计概率密度函数。
+公式如下：
+\begin{equation}
+    \hat{p}(x)=\frac{1}{n}\sum_{i=1}^{n}\frac{1}{h^d}K(\frac{x-x_i}{h})
+\end{equation}
+
+核函数为：
+\begin{equation}
+    \text{{kernel\_sum}} = \frac{1}{n} \sum_{i=1}^{n} \frac{e^{-\frac{(x - x_i)^2}{2h^2}}}{\sqrt{2\pi}h}
+\end{equation}
 
 \subsection{代码与结果}
+代码如下所示：
+\begin{lstlisting}[language=Python, caption={Parzen窗法}, label={code:parzen}]
+def parzen_window_pdf(x, data, h):
+    '''
+    Parzen窗法概率密度估计函数
+    '''
+    n = len(data)
+    prob_density = np.sum(np.exp(-(x - data) ** 2 / (2 * h ** 2)) / (np.sqrt(2 * np.pi) * h)) / n
+    return prob_density
 
-\subsection{后剪枝}
+def bayes_classifier_parzen_height(train_data, test_data, h=5.0, prior_prob_male=0.5, prior_prob_female=0.5):
+    '''
+    以身高为特征的Bayes分类器（Parzen窗法）
+    '''
+    predictions = []
+    for index, test_point in test_data.iterrows():
+        # 提取训练集中男女身高数据
+        male_height_data = train_data[train_data['性别'] == '男']['身高(cm)']
+        female_height_data = train_data[train_data['性别'] == '女']['身高(cm)']
+        # 计算男女身高的概率密度函数
+        male_height_pdf = parzen_window_pdf(test_point['身高(cm)'], male_height_data, h)
+        female_height_pdf = parzen_window_pdf(test_point['身高(cm)'], female_height_data, h)
+        # 计算后验概率
+        posterior_prob_male = prior_prob_male * male_height_pdf
+        posterior_prob_female = prior_prob_female * female_height_pdf
+        # 进行分类
+        prediction = '男' if posterior_prob_male > posterior_prob_female else '女'
+        predictions.append(prediction)
+    return predictions
+\end{lstlisting}
+
+结果性能分析（以不同窗宽下ROC曲线作为分析指标）如下：
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{image/Parzen.png}
+    \caption{Parzen窗法ROC曲线}
+    \label{fig:roc}
+\end{figure}
 
 \section{总结与体会}
-
+通过本次实验，我对贝叶斯分类器有更深入的理解，对其公式推导有了更深刻的认识，
+同时也对Parzen窗法的原理有了更深入的了解。
 
 \end{document}
 
