@@ -1,0 +1,182 @@
+%!TEX program = xelatex
+% 完整编译: xelatex -> biber/bibtex -> xelatex -> xelatex
+\documentclass[lang=cn,a4paper]{shu-lab-report}
+
+\usepackage{standalone}
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+\renewcommand{\lstlistingname}{代码}
+
+
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The Cover Page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+
+~ \\
+
+\vspace{3cm}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=10cm]{image/shulogo.png}
+\end{figure}
+
+\centerline{\large{\textbf{SHANGHAI  UNIVERSITY}}}
+
+\vspace{8mm}
+
+\centerline{\kaishu\Huge{\textbf{机器学习基础~实验报告}}}
+
+\vspace{8mm}
+
+
+\vspace{16mm}
+
+\begin{center}
+\renewcommand\arraystretch{1.5}
+\begin{tabular}{r c}
+    \makebox[8em][s]{\LARGE{学号姓名}} & \LARGE{21122915王佳信}\\  \cmidrule(l){2-2} 
+    \makebox[8em][s]{\LARGE{实验序号}} & \LARGE{实验4~贝叶斯分类器}\\            \cmidrule(l){2-2} 
+    \makebox[8em][s]{\LARGE{日期}}    & \LARGE{2023年12月18日}\\ \cmidrule(l){2-2}
+\end{tabular}
+\end{center}
+
+\vspace{8mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The Content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\setcounter{page}{1}
+
+\section{实验目的与要求}
+目的：熟悉和构建贝叶斯分类
+
+内容：
+\begin{itemize}
+    \item 构建贝叶斯分类器，并计算准确率
+    \item 对比贝叶斯分类器和决策树，及线性模型
+\end{itemize}
+
+\section{实验环境}
+\textbf{工具}: python, numpy, pandas, matplotlib
+
+\textbf{数据集}: 
+男生女生身高体重鞋码数据集。
+
+数据集中包括男生女生身高体重鞋码数据，数据集中共有800个样本，每个样本包括4个属性，分别是身高、体重、鞋码和性别。其中身高和体重是连续属性，鞋码是离散属性，性别是类别属性。
+
+
+\section{实验内容及其设计与实现}
+
+\subsection{实验内容1~贝叶斯分类器}
+\subsubsection{算法原理}
+朴素贝叶斯是经典的机器学习算法之一，也是为数不多的基于概率论的分类算法。
+对于大多数的分类算法，在所有的机器学习分类算法中，
+朴素贝叶斯和其他绝大多数的分类算法都不同。比如决策树，KNN，逻辑回归，支持向量机等，
+他们都是判别方法，也就是直接学习出特征输出Y和特征X之间的关系，要么是决策函数，
+要么是条件分布。但是朴素贝叶斯却是生成方法，该算法原理简单，也易于实现。
+
+朴素贝叶斯算法的核心思想是基于贝叶斯定理和特征条件独立假设，即假设特征之间相互独立。
+贝叶斯公式便是基于条件概率，通过 $P(B|A)$ 来求 $P(A|B)$ :
+\begin{equation}
+    P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+\end{equation}
+
+朴素贝叶斯对条件概率分布作出了独立性的假设，在这个假设的前提上，条件概率可以转化为：
+\begin{equation}
+    P(x|y_k)=P(x_1,x_2,...,x_n|y_k)=\prod_{i=1}^{n}{P(x_i|y_k)}
+\end{equation}
+
+代入上面贝叶斯公式中，得到：
+\begin{equation}
+    P(y_k|x)=\frac{P(y_k)\ast\prod_{i=1}^{n}{P(x_i|y_k)}}{\sum_{k}{P(y_k)}\ast\prod_{i=1}^{n}{P(x_i|y_k)}}
+\end{equation}
+
+于是，朴素贝叶斯分类器可表示为：
+\begin{equation}
+    y=f(x)=\arg\max_{y_k}{P(y_k)\ast\prod_{i=1}^{n}{P(x_i|y_k)}}
+\end{equation}
+
+
+
+朴素贝叶斯算法的基本步骤：
+\begin{enumerate}
+    \item 计算先验概率及类条件概率密度
+    \item 对于给定的样本特征，通过贝叶斯公式计算后验概率
+    \item 若按最小错误率，选择具有最大后验概率的类别作为预测结果，
+    或最小风险原则分类
+\end{enumerate}
+
+\subsubsection{代码及结果}
+
+
+\section{实验内容2~}
+\subsection{算法原理}
+
+\subsection{代码与结果}
+
+\subsection{后剪枝}
+
+\section{总结与体会}
+
+
+\end{document}
+
+
+
+
+\section{模板测试部分（实际编写时请删除）}
+
+如\coderef{code:example}所示，为示例代码。
+\begin{lstlisting}[language=Python, caption={示例代码}, label={code:example}]
+
+\end{lstlisting}
+
+
+如\figref{fig:example}所示，为上海大学校徽。
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{image/shulogo.png}
+    \caption{上海大学校徽}
+    \label{fig:example}
+\end{figure}
+
+如\tabref{tab:example}所示，为测试表。
+\begin{table}[!htbp]
+    \caption{测试表}
+    \label{tab:example}
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+            & value\\
+        \midrule
+        1   & 1     \\
+        2   & 2     \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\textbf{说明}：叙述各个实验任务的过程和结果，着重说明各个实验所反映的
+操作系统设计原理，加以评述。
+
+\begin{itemize}
+    \item 
+    \item 
+    \item 
+\end{itemize}
+
+\begin{enumerate}
+    \item 
+    \item 
+    \item 
+\end{enumerate}
