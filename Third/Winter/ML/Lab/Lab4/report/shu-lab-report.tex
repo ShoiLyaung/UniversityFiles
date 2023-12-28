@@ -116,6 +116,45 @@
     或最小风险原则分类
 \end{enumerate}
 
+\subsubsection{对比贝叶斯分类器和决策树、线性模型}
+\textbf{贝叶斯分类器}：基于概率论的分类器，对于连续特征，其假设特征服从正态分布，
+计算均值和标准差，代入概率密度函数，计算后验概率，进行分类。
+对于离散特征，其假设特征服从多项式分布，计算每个特征的概率，代入后验概率公式，进行分类。
+
+朴素贝叶斯算法的优点：
+\begin{itemize}
+    \item 朴素贝叶斯模型有稳定的分类效率。
+    \item 对小规模的数据表现很好，能处理多分类任务，适合增量式训练，
+    尤其是数据量超出内存时，可以一批批的去增量训练。
+    \item 对缺失数据不太敏感，算法也比较简单，常用于文本分类。
+\end{itemize}
+
+朴素贝叶斯算法的缺点：
+\begin{itemize}
+    \item 需要知道先验概率，且先验概率很多时候取决于假设，
+    假设的模型可以有很多种，因此在某些时候会由于假设的先验模型的原因导致预测效果不佳。
+    \item 对输入数据的表达形式很敏感（0值、离散、连续，值极大极小之类的）。
+\end{itemize}
+
+\textbf{决策树}：基于信息论的分类器，十分适合离散特征的处理。
+对于离散特征，其它很多模型都需要对其进行编码，得到很稀疏的编码向量再进行模型拟合，
+因较大的过拟合风险对样本量有较高要求。决策树则统计离散特征后直接计算信息增益等，
+再加上有各类集成树模型的存在,可以进一步提升性能。
+
+决策树的优点是易于理解和解释，可以处理非线性和缺失数据，
+可以生成可视化的树形结构。
+
+决策树的缺点是容易过拟合，对噪声数据敏感，
+可能产生不稳定的结果。决策树适用于特征维度较高，
+数据量较大，类别分布较不平衡的情况。
+
+\textbf{线性模型}：线性模型是一种基于函数的分类模型，
+它通过构造一个线性函数来划分数据空间，使得不同类别的数据位于不同的区域。
+线性模型的优点是计算效率高，可以进行特征选择和正则化，可以处理大规模的数据。
+线性模型的缺点是不能处理非线性的数据，对异常值和多重共线性敏感，
+可能存在欠拟合的风险。线性模型适用于特征维度较高，
+数据量较大，数据分布较线性的情况。
+
 \subsubsection{代码及结果}
 对于单个特征的朴素贝叶斯分类器，假设每个特征都服从正态分布，根据正态分布的概率密度函数：
 \begin{equation}
@@ -157,7 +196,7 @@ def bayes_classifier_by(train_data, test_data, feature='身高(cm)', target='性
 结果性能分析（以ROC曲线作为分析指标）如下：
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.3\textwidth]{image/single_feature_output.png}
+    \includegraphics[width=0.32\textwidth]{image/single_feature_output.png}
     \caption{不同特征ROC曲线}
     \label{fig:roc}
 \end{figure}
@@ -166,13 +205,6 @@ def bayes_classifier_by(train_data, test_data, feature='身高(cm)', target='性
 \begin{lstlisting}[language=Python, caption={最小错误率分类器}, label={code:minimum_error_rate}]
     class MyGaussianNB:
     def fit(self, X, y, prior_probs=None):
-        '''
-        训练
-        :param X:               训练集特征
-        :param y:               训练集标签
-        :param prior_probs:     先验概率
-        :return:                None
-        '''
         self.classes, class_counts = np.unique(y, return_counts=True)
         if prior_probs is not None:
             prior_probs = {'男': prior_probs, '女': 1 - prior_probs}
@@ -200,11 +232,6 @@ def bayes_classifier_by(train_data, test_data, feature='身高(cm)', target='性
         return np.array(predictions)
     
     def predict_proba(self, X):
-        '''
-        预测概率
-        :param X:   测试集特征
-        :return:    各类别的概率
-        '''
         probas = []
         for x in X:
             class_probs = []
@@ -295,10 +322,11 @@ def bayes_classifier_parzen_height(train_data, test_data, h=5.0, prior_prob_male
 结果性能分析（以不同窗宽下ROC曲线作为分析指标）如下：
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.5\textwidth]{image/Parzen.png}
+    \includegraphics[width=0.4\textwidth]{image/Parzen.png}
     \caption{Parzen窗法ROC曲线}
     \label{fig:roc}
 \end{figure}
+
 
 \section{总结与体会}
 通过本次实验，我对贝叶斯分类器有更深入的理解，对其公式推导有了更深刻的认识，
