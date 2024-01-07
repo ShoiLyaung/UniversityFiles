@@ -1,0 +1,447 @@
+%!TEX program = xelatex
+% 完整编译: xelatex -> biber/bibtex -> xelatex -> xelatex
+\documentclass[lang=cn,a4paper]{shu-lab-report}
+
+\usepackage{standalone}
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+\renewcommand{\lstlistingname}{代码}
+
+
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The Cover Page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+
+~ \\
+
+\vspace{3cm}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=10cm]{image/shulogo.png}
+\end{figure}
+
+\centerline{\large{\textbf{SHANGHAI  UNIVERSITY}}}
+
+\vspace{8mm}
+
+\centerline{\kaishu\Huge{\textbf{机器学习基础~实验报告}}}
+
+\vspace{8mm}
+
+
+\vspace{16mm}
+
+\begin{center}
+\renewcommand\arraystretch{1.5}
+\begin{tabular}{r c}
+    \makebox[8em][s]{\LARGE{学号姓名}} & \LARGE{21122915王佳信}\\  \cmidrule(l){2-2} 
+    \makebox[8em][s]{\LARGE{实验序号}} & \LARGE{实验5~神经网络及支持向量机}\\            \cmidrule(l){2-2} 
+    \makebox[8em][s]{\LARGE{日期}}    & \LARGE{2023年1月6日}\\ \cmidrule(l){2-2}
+\end{tabular}
+\end{center}
+
+\vspace{8mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The Content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\setcounter{page}{1}
+
+\section{实验目的与要求}
+目的：构建基于FC和CNN的神经网络，及支持向量机
+
+内容：
+\begin{itemize}
+    \item 利用pytorch构建基于FC和CNN的神经网络，都仅1层
+    \item 构建基于SVM的分类器
+    \item 对结果进行对比和可视化，同时对比线性方法
+\end{itemize}
+
+\section{实验环境}
+python, scikit-learn, pytorch
+
+\section{实验内容及其设计与实现}
+
+\subsection{实验内容1~支持向量机}
+支持向量机（Support vector machine, SVM）是一种二分类模型，是按有监督学习方式对数据进行二元分类的广义线性分类器。
+其基本模型定义为特征空间上的间隔最大的线性分类器，其学习策略便是间隔最大化，最终可转化为一个凸二次规划问题的求解。SVM的学习算法就是求解凸二次规划的最优化算法。
+
+支持向量机的优点有：
+\begin{itemize}
+    \item 在高维空间里也非常有效
+    \item 对于数据维度远高于数据样本量的情况也有效
+    \item 在决策函数中使用训练集的子集(也称为支持向量)，因此也是内存高效利用的。
+    \item 通用性：可以为决策函数指定不同的核函数。已经提供了通用核函数，但也可以指定自定义核函数。
+\end{itemize}
+
+支持向量机的缺点包括：
+\begin{itemize}
+    \item 如果特征数量远远大于样本数，则在选择核函数和正则化项时要避免过度拟合。
+    \item SVMs不直接提供概率估计， 这些计算使用昂贵的五倍交叉验证(见分数和概率)。
+\end{itemize}
+
+\subsubsection{算法原理}
+支持向量机在高维或无限维空间中构造超平面或超平面集，可用于分类、回归或其他任务。
+从直觉上看， 一个好的分离的实现方案是, 
+超平面距离训练数据中任意一类的的样本的距离达到最大(也被称为 函数间距)， 
+因为通常来讲， 间距越大， 分类器的泛化误差就越小。
+
+给定训练向量 $x_i \in R^n, i =1, ..., n$ ， 在两个类中， 和一个向量 $y \in \{-1, 1\}^n$ ，
+， 我们的目标是找到 一个超平面 $w^T x + b = 0$ ， 使得 $y_i (w^T x_i + b) \geq 1, i = 1, ..., n$ 。
+
+SVC主要能解决以下问题：
+$$
+\begin{array}{ll}
+    \min_{w, b, \zeta} & \frac{1}{2} w^T w + C \sum_{i=1}^n \zeta_i \\
+    \text { subject to } & y_i (w^T x_i + b) \geq 1 - \zeta_i, i = 1, ..., n \\
+    & \zeta_i \geq 0, i = 1, ..., n
+\end{array}
+$$
+
+直觉上讲， 我们要最大化间距(margin)(等价于最小化 $||w||^2$ )， 同时要最小化误分类的样本数。
+这两个目标是相互矛盾的。 为了解决这个问题， 我们引入松弛变量 $\zeta_i \geq 0$ ，
+使得约束 $y_i (w^T x_i + b) \geq 1 - \zeta_i$ 对所有的 $i = 1, ..., n$ 都成立。
+这里的 $\zeta_i$ 表示第 $i$ 个样本允许的误差。 现在， 问题变成了最小化 $||w||^2 + C \sum_{i=1}^n \zeta_i$ ，
+其中 $C$ 是一个大于0的超参数， 用来控制间距和误差的权重。 这个问题可以通过二次规划求解。
+
+Sequential Minimal Optimization（SMO）是一种用于训练支持向量机（SVM）的算法。
+SMO的主要思想是将大型二次优化问题拆分为一系列更小、更易处理的子问题。
+该算法由John Platt于1998年引入，作为一种有效解决与SVM相关的二次规划问题的方法。
+
+1. \textbf{目标函数：}
+   SVM训练的目标是找到一个最优的超平面，该超平面能够在不同类别之间进行分割，并最大化间隔。这是通过解决一个带有约束的二次优化问题来实现的。在SVM问题中，要最小化的目标函数是一个二次函数，形式如下：
+
+   \[L(\alpha) = \sum_{i=1}^{m} \alpha_i - \frac{1}{2} \sum_{i=1}^{m}\sum_{j=1}^{m} \alpha_i \alpha_j y_i y_j K(x_i, x_j)\]
+
+   其中 \(\alpha_i\) 是拉格朗日乘子，\(y_i\) 是类别标签，\(C\) 是正则化参数，\(K(x_i, x_j)\) 是核函数。
+
+2. \textbf{SMO优化问题：}
+   SMO将大型的二次优化问题分解为一系列可以通过解析方法求解的二元子问题。它在每个步骤中优化一对拉格朗日乘子 \(\alpha_i\) 和 \(\alpha_j\)。
+
+3. \textbf{处理约束条件：}
+   在每次迭代中，SMO选择一对拉格朗日乘子 \((\alpha_i, \alpha_j)\) ，这对乘子违反了约束条件，即它们不满足Karush-Kuhn-Tucker（KKT）条件。这些条件包括等式 \(\sum_{i=1}^{m} \alpha_i y_i = 0\) 和不等式 \(0 \leq \alpha_i \leq C\)。
+
+4. \textbf{更新乘子：}
+   拉格朗日乘子在一对 \((\alpha_i, \alpha_j)\) 上进行更新，以朝着目标函数的最小值移动。更新后的拉格朗日乘子必须满足等式约束，以确保满足KKT条件。
+
+5. \textbf{更新阈值（偏置）：}
+   在每对拉格朗日乘子被优化后，根据拉格朗日乘子的值和支持向量的情况，更新阈值（偏置） \(b\)。
+
+6. \textbf{收敛：}
+   SMO重复这些步骤直到收敛，当拉格朗日乘子 \(\alpha_i\) 不再显著改变时达到收敛。
+
+SMO的核心思想是通过迭代选择和优化一对拉格朗日乘子，有效地解决SVM优化问题，使其在处理大型数据集时能够更高效。
+
+\subsubsection{代码及结果}
+以下为SMO算法的支持向量机的代码：
+\begin{lstlisting}[language=Python, caption={SVM}, label={code:svm}]
+import numpy as np
+
+class SVM:
+    def __init__(self, C=1.0, tol=0.01, max_passes=5):
+        self.C = C  # regularization parameter
+        self.tol = tol  # tolerance for numerical errors
+        self.max_passes = max_passes  # maximum number of iterations without changing alpha values
+        self.X = None
+        self.y = None
+        self.m = None
+        self.n = None
+        self.alpha = None
+        self.b = 0
+        self.E = None
+
+    def fit(self, X, y):
+        self.X = X
+        self.y = y
+        self.m, self.n = X.shape
+        # Initialize alpha, b, and error cache
+        self.alpha = np.zeros(self.m)
+        self.b = 0
+        self.E = np.zeros(self.m)
+        passes = 0
+        while passes < self.max_passes:
+            num_changed_alphas = 0
+            for i in range(self.m):
+                E_i = self.decision_function(self.X[i]) - self.y[i]
+                if ((self.y[i] * E_i < -self.tol and self.alpha[i] < self.C) or
+                        (self.y[i] * E_i > self.tol and self.alpha[i] > 0)):
+                    j = self.select_second_alpha(i)
+                    E_j = self.decision_function(self.X[j]) - self.y[j]
+                    alpha_i_old, alpha_j_old = self.alpha[i], self.alpha[j]
+                    L, H = self.compute_L_H(self.alpha[i], self.alpha[j], self.y[i], self.y[j])
+                    if L == H:
+                        continue
+                    eta = 2 * self.X[i].dot(self.X[j]) - self.X[i].dot(self.X[i]) - self.X[j].dot(self.X[j])
+                    if eta >= 0:
+                        continue
+                    self.alpha[j] -= (self.y[j] * (E_i - E_j)) / eta
+                    self.alpha[j] = min(H, max(L, self.alpha[j]))
+                    if abs(self.alpha[j] - alpha_j_old) < 1e-5:
+                        continue
+                    self.alpha[i] += self.y[i] * self.y[j] * (alpha_j_old - self.alpha[j])
+                    b1 = (self.b - E_i -
+                          self.y[i] * (self.alpha[i] - alpha_i_old) * self.X[i].dot(self.X[i]) -
+                          self.y[j] * (self.alpha[j] - alpha_j_old) * self.X[i].dot(self.X[j]))
+                    b2 = (self.b - E_j -
+                          self.y[i] * (self.alpha[i] - alpha_i_old) * self.X[i].dot(self.X[j]) -
+                          self.y[j] * (self.alpha[j] - alpha_j_old) * self.X[j].dot(self.X[j]))
+                    if 0 < self.alpha[i] < self.C:
+                        self.b = b1
+                    elif 0 < self.alpha[j] < self.C:
+                        self.b = b2
+                    else:
+                        self.b = (b1 + b2) / 2
+                    num_changed_alphas += 1
+            if num_changed_alphas == 0:
+                passes += 1
+            else:
+                passes = 0
+
+    def decision_function(self, x):
+        return np.dot(self.alpha * self.y, self.X.dot(x)) - self.b
+    def predict(self, X):
+        return np.sign(np.array([self.decision_function(x) for x in X]))
+    def select_second_alpha(self, i):
+        j = i
+        while j == i:
+            j = np.random.randint(self.m)
+        return j
+    def compute_L_H(self, alpha_i, alpha_j, y_i, y_j):
+        if y_i != y_j:
+            return max(0, alpha_j - alpha_i), min(self.C, self.C + alpha_j - alpha_i)
+        else:
+            return max(0, alpha_i + alpha_j - self.C), min(self.C, alpha_i + alpha_j)
+
+\end{lstlisting}
+
+该算法在手写数字数据集的分类准确率达到0.986。
+
+之后我又通过自己生成的随机数据集将分类结果可视化：
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.35\textwidth]{image/SVM.png}
+    \caption{SVM分类结果}
+    \label{fig:svm}
+\end{figure}
+
+然后我通过调用sklearn中的LinearSVM，对支持向量进行可视化：
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.35\textwidth]{image/SVM2.png}
+    \caption{支持向量可视化}
+    \label{fig:svm2}
+\end{figure}
+
+为了对比了SVM与线性分类器效果的差别，我通过sklearn中的性能评估函数，得到了对于该数据集，SVM的准确率为0.97，线性分类器的准确率为0.90。
+\begin{figure}[!htbp]
+    \centering
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=6cm]{image/SVM3.png}
+        \caption{SVM分类结果}
+    \end{minipage}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=6cm]{image/SVM4.png}
+        \caption{线性分类器分类结果}
+    \end{minipage}
+    \label{fig:visualizaion}
+\end{figure}
+
+线性分类器
+使用线性函数（直线、平面或超平面）将特征空间划分为两个类别。
+常见的线性分类器包括感知机、逻辑回归、线性支持向量机等。
+在训练过程中，通过调整权重和偏置，使得线性分类器在训练数据上的损失最小化。
+
+支持向量机（SVM）：
+是一种更灵活的分类器，不仅能够处理线性可分的情况，还能处理非线性可分的情况。
+SVM的目标是找到一个最优的超平面，最大化类别之间的间隔，并考虑支持向量（距离超平面最近的训练样本点）。
+SVM可以使用不同的核函数来处理非线性问题，如多项式核、径向基函数（RBF）核等。
+
+加入核函数后对鸢尾花数据集进行分类：
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{image/SVM5.png}
+    \caption{加入核函数后对鸢尾花数据集进行分类结果}
+    \label{fig:svm5}
+\end{figure}
+
+\subsection{实验内容2~神经网络}
+
+\subsubsection{代码及结果}
+
+\subsection{实验内容3}
+\subsubsection{算法原理}
+全连接神经网络是一种基本的神经网络结构，其中每个神经元都与前一层的所有神经元相连接。
+这种网络结构包括输入层、若干隐藏层和输出层。在全连接层中，
+每个神经元都与前一层的所有神经元相连接，并通过权重进行连接。网络的输出是通过激活函数处理的。
+
+卷积神经网络是一种专门设计用于处理网格状数据（如图像）的神经网络结构。
+CNN包含卷积层、池化层和全连接层。卷积层用于检测图像中的特征，
+池化层用于降低数据维度，全连接层用于生成最终输出。
+权重共享和局部感知是CNN的关键特征。
+
+\subsubsection{代码及结果}
+我使用PyTorch实现。
+定义了一个简单的全连接神经网络模型包括一个线性层（全连接层），并在输出上使用sigmoid激活函数，
+以及一个简单的CNN模型，包括卷积层、ReLU激活函数和池化层。
+
+\begin{lstlisting}[language=Python, caption={神经网络}, label={code:nn}]
+    import...
+    
+    class SimpleFCNN(nn.Module):
+        def __init__(self, input_size, output_size):
+            super(SimpleFCNN, self).__init__()
+            self.fc = nn.Linear(input_size, output_size)
+    
+        def forward(self, x):
+            x = self.fc(x)
+            return x
+    
+    class SimpleCNN(nn.Module):
+        def __init__(self, in_channels, out_channels, kernel_size, input_size, output_size):
+            super(SimpleCNN, self).__init__()
+            self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size)
+            self.fc = nn.Linear(input_size, output_size)
+    
+        def forward(self, x):
+            x = self.conv1(x)
+            x = x.view(x.size(0), -1)
+            x = self.fc(x)
+            return x
+    
+    input_size = 784  # 对于简单的全连接神经网络，假设输入是28x28的图像
+    output_size = 10  # 输出类别数量
+    fc_net = SimpleFCNN(input_size, output_size)
+    cnn_net = SimpleCNN(1, 16, 3, 576, output_size)  # 示例输入图像大小为24x24
+    print("全连接神经网络结构：\n", fc_net)
+    print("\n卷积神经网络结构：\n", cnn_net)
+\end{lstlisting}
+神经网络结构如下：
+\begin{lstlisting}[numbers=none]
+    全连接神经网络结构：
+ SimpleFCNN(
+  (fc): Linear(in_features=784, out_features=10, bias=True)
+)
+
+卷积神经网络结构：
+ SimpleCNN(
+  (conv1): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1))
+  (fc): Linear(in_features=576, out_features=10, bias=True)
+)
+\end{lstlisting}
+
+我在虚构的数据集上训练了全连接神经网络。
+\begin{lstlisting}[language=Python, caption={神经网络}, label={code:nn}]
+    import...
+    
+    X_tensor = torch.tensor(X, dtype=torch.float32)
+    y_tensor = torch.tensor(y, dtype=torch.float32)
+    X_train, X_test, y_train, y_test = train_test_split(X_tensor, y_tensor, test_size=0.2, random_state=42)
+    
+    class SimpleFCNN(nn.Module):
+        def __init__(self, input_size, output_size):
+            super(SimpleFCNN, self).__init__()
+            self.fc = nn.Linear(input_size, output_size)
+    
+        def forward(self, x):
+            x = self.fc(x)
+            return x
+
+    input_size = X_train.shape[1]
+    output_size = 1
+    fc_net = SimpleFCNN(input_size, output_size)
+    criterion = nn.BCEWithLogitsLoss()
+    optimizer = optim.Adam(fc_net.parameters(), lr=0.001)
+    num_epochs = 10
+    for epoch in range(num_epochs):
+        optimizer.zero_grad()
+        outputs = fc_net(X_train)
+        loss = criterion(outputs, y_train.view(-1, 1))
+        loss.backward()
+        optimizer.step()
+    with torch.no_grad():
+        fc_predictions = torch.sigmoid(fc_net(X_test)).round().numpy().astype(int)
+    fc_accuracy = accuracy_score(y_test.numpy().astype(int), fc_predictions)
+    print("全连接神经网络的准确率：", fc_accuracy)
+\end{lstlisting}    
+
+通过计算准确率，我评估了模型的性能。全连接神经网络的准确率为0.455。
+
+我在手写的数据集上训练了卷积神经网络。
+\begin{lstlisting}[language=Python, caption={神经网络}, label={code:nn}]
+import...
+
+transform = transforms.Compose([transforms.ToTensor()])
+mnist_train = datasets.MNIST(root="./data", train=True, download=True, transform=transform)
+mnist_train, mnist_val = train_test_split(mnist_train, test_size=0.2, random_state=42)
+
+batch_size = 64
+train_loader = DataLoader(mnist_train, batch_size=batch_size, shuffle=True)
+val_loader = DataLoader(mnist_val, batch_size=batch_size, shuffle=False)
+
+class SimpleCNN(nn.Module):
+    def __init__(self):
+        super(SimpleCNN, self).__init__()
+        self.conv1 = nn.Conv2d(1, 16, kernel_size=3, stride=1, padding=1)
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.fc = nn.Linear(16 * 14 * 14, 10)  # 输入大小根据图像大小调整
+
+    def forward(self, x):
+        x = self.conv1(x)
+        x = torch.relu(x)
+        x = self.pool(x)
+        x = x.view(-1, 16 * 14 * 14)
+        x = self.fc(x)
+        return x
+
+cnn_net = SimpleCNN()
+
+criterion_cnn = nn.CrossEntropyLoss()
+optimizer_cnn = optim.Adam(cnn_net.parameters(), lr=0.001)
+
+num_epochs_cnn = 5
+for epoch in range(num_epochs_cnn):
+    for inputs, labels in train_loader:
+        optimizer_cnn.zero_grad()
+        outputs_cnn = cnn_net(inputs)
+        loss_cnn = criterion_cnn(outputs_cnn, labels)
+        loss_cnn.backward()
+        optimizer_cnn.step()
+
+cnn_net.eval()
+with torch.no_grad():
+    all_preds = []
+    all_labels = []
+    for inputs, labels in val_loader:
+        outputs_cnn = cnn_net(inputs)
+        preds = torch.argmax(outputs_cnn, dim=1)
+        all_preds.extend(preds.numpy())
+        all_labels.extend(labels.numpy())
+
+cnn_accuracy = accuracy_score(all_labels, all_preds)
+print("卷积神经网络在MNIST验证集上的准确率：", cnn_accuracy)
+\end{lstlisting}
+卷积神经网络在MNIST验证集上的准确率为0.98。
+
+\section{总结与体会}
+通过本次实验，我学习了支持向量机（SVM）和全连接神经网络（FCNN）以及卷积神经网络（CNN）
+的基本概念和原理。同时，我们展示了如何使用PyTorch库实现一个简单的SVM和FCNN模型，
+以及如何使用SVM和CNN对鸢尾花数据集进行分类。
+我还学习了如何使用线性支持向量机（LinearSVM）与SVM进行比较，以评估它们的性能。
+
+在实验过程中，我们遇到了一些问题。例如，在使用SVM时，我们遇到了核函数选择不当的问题。
+在实现FCNN和CNN时，我们遇到了模型训练和优化的问题。
+为了解决这些问题，我们调整了参数，例如调整SVM的核函数、调整FCNN和CNN的权重和学习率等。
+
+\end{document}
