@@ -1,0 +1,337 @@
+%!TEX program = xelatex
+% 完整编译: xelatex -> biber/bibtex -> xelatex -> xelatex
+\documentclass[lang=cn,a4paper]{shu-lab-report}
+
+\usepackage{standalone}
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+\renewcommand{\lstlistingname}{代码}
+
+
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The Cover Page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+
+~ \\
+
+\vspace{3cm}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=10cm]{image/shulogo.png}
+\end{figure}
+
+\centerline{\large{\textbf{SHANGHAI  UNIVERSITY}}}
+
+\vspace{8mm}
+
+\centerline{\kaishu\Huge{\textbf{机器学习基础~实验报告}}}
+
+\vspace{8mm}
+
+
+\vspace{16mm}
+
+\begin{center}
+\renewcommand\arraystretch{1.5}
+\begin{tabular}{r c}
+    \makebox[8em][s]{\LARGE{学号姓名}} & \LARGE{21122915王佳信}\\  \cmidrule(l){2-2} 
+    \makebox[8em][s]{\LARGE{实验序号}} & \LARGE{实验6~聚类}\\            \cmidrule(l){2-2} 
+    \makebox[8em][s]{\LARGE{日期}}    & \LARGE{2023年1月7日}\\ \cmidrule(l){2-2}
+\end{tabular}
+\end{center}
+
+\vspace{8mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The Content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\setcounter{page}{1}
+
+\section{实验目的与要求}
+目的：熟悉聚类方法
+
+内容：熟悉K-Means，基于密度聚类，和基于层次聚类
+
+\section{实验环境}
+python, numpy, scikit-learn
+
+\section{实验内容及其设计与实现}
+\subsection{实验内容1~K-Means}
+K-Means算法是一种无监督的聚类算法，所谓聚类，即根据相似性原则，
+将具有较高相似度的数据对象划分至同一类簇，将具有较高相异度的数据对象划分至不同类簇。
+聚类过程为无监督过程，即待处理数据对象没有任何先验知识。
+
+K-Means算法中的K代表类簇个数，Means代表类簇内数据对象的均值，
+因此，K-Means算法又称为k-均值算法。K-Means算法是一种基于划分的聚类算法，
+以距离作为数据对象间相似性度量的标准，即数据对象间的距离越小，
+则它们的相似性越高，则它们越有可能在同一个类簇。
+
+\subsubsection{算法原理}
+K均值算法的步骤如下：
+
+\begin{enumerate}
+    \item 选择要划分的簇数$K$。
+    \item 随机初始化$K$个簇中心。
+    \item 将每个数据点分配给离其最近的簇中心。
+    \item 更新每个簇的中心为其包含数据点的平均值。
+    \item 重复步骤3和步骤4，直到簇中心不再变化或达到预定的迭代次数。
+\end{enumerate}
+
+K均值算法的优化目标是最小化数据点到其所属簇中心的平方距离之和，即最小化以下目标函数：
+
+\begin{equation}
+J = \sum_{i=1}^{m} \sum_{j=1}^{K} \|x^{(i)} - \mu_j\|^2
+\end{equation}
+
+每个数据点被分配到离其最近的簇中心：
+
+\begin{equation}
+c^{(i)} = \underset{j}{\arg\min} \|x^{(i)} - \mu_j\|^2
+\end{equation}
+
+每个簇的中心被更新为其包含数据点的平均值：
+
+\begin{equation}
+\mu_j = \frac{\sum_{i=1}^{m} \mathbf{1}\{c^{(i)} = j\} \cdot x^{(i)}}{\sum_{i=1}^{m} \mathbf{1}\{c^{(i)} = j\}}
+\end{equation}
+
+k\text{-}means算法以距离作为数据对象间相似性度量的标准，通常采用欧氏距离来计算数据对象间的距离。其中，欧氏距离计算公式如下：
+\[
+\text{dist}\left(x_i,x_j\right) = \sqrt{\sum_{d=1}^{D}{(x_{i,d}-x_{j,d})}^2}
+\]
+其中，D表示数据对象的属性个数。k\text{-}means算法聚类过程中，每次迭代，对应的类簇中心需要重新计算：对应类簇中所有数据对象的均值，即为更新后该类簇的类簇中心。定义第k个类簇的类簇中心为$\text{Center}_k$，则类簇中心更新方式如下：
+\[
+\text{Center}_k = \frac{1}{|C_k|}\sum_{x_i \in C_k}x_i
+\]
+其中，$C_k$表示第k个类簇，$|C_k|$表示第k个类簇中数据对象的个数，这里的求和是指类簇$C_k$中所有元素在每列属性上的和，因此$\text{Center}_k$也是一个含有D个属性的向量，表示为$\text{Center}_k = (\text{Center}_1,\text{Center}_2,\ldots,\text{Center}_D)$。
+
+k\text{-}means算法需要不断地迭代来重新划分类簇，并更新类簇中心。一般情况，有两种方法来终止迭代：一种方法是设定迭代次数T，当到达第T次迭代，则终止迭代，此时所得类簇即为最终聚类结果；另一种方法是采用误差平方和准则函数，函数模型如下：
+\[
+J = \sum_{k=1}^{K}\sum_{x_i \in C_k}{\text{dist}(x_i,\text{Center}_k)}
+\]
+其中，K表示类簇个数。当两次迭代J的差值小于某一阈值时，即$\Delta J < \delta$时，则终止迭代，此时所得类簇即为最终聚类结果。
+
+综上，k\text{-}means算法思想可描述为：首先初始化K个类簇中心；然后计算各个数据对象到聚类中心的距离，把数据对象划分至距离其最近的聚类中心所在类簇中；接着根据所得类簇，更新类簇中心；然后继续计算各个数据对象到聚类中心的距离，把数据对象划分至距离其最近的聚类中心所在类簇中；接着根据所得类簇，继续更新类簇中心；……一直迭代，直到达到最大迭代次数T，或者两次迭代J的差值小于某一阈值时，迭代终止，得到最终聚类结果。
+
+
+\subsubsection{代码及结果}
+以下为K-Means算法的实现代码：
+\begin{lstlisting}[language=Python, caption={K-Means算法实现}, label={code:kmeans}]
+    class KMeans:
+    def __init__(self, n_clusters=8, max_iters=300):
+        self.n_clusters = n_clusters  # 聚类的簇数
+        self.max_iters = max_iters  # 最大迭代次数
+
+    def fit(self, data):
+        self.cluster_centers_ = data[np.random.choice(len(data), self.n_clusters, replace=False)]  # 随机初始化聚类中心
+        for _ in range(self.max_iters):
+            labels = np.argmin(np.linalg.norm(data[:, np.newaxis] - self.cluster_centers_, axis=2), axis=1)
+            new_centroids = np.array([data[labels == k].mean(axis=0) for k in range(self.n_clusters)])
+            if np.all(new_centroids == self.cluster_centers_):
+                break
+            self.cluster_centers_ = new_centroids
+        self.labels_ = labels
+\end{lstlisting}
+
+
+\textbf{1. 初始化质心（Centroids）：}
+在算法开始时，随机选择 \(k\) 个数据点作为初始的质心。
+
+\textbf{2. 迭代优化：}
+算法迭代进行以下两个步骤，直到满足停止条件（例如迭代次数达到最大值或质心不再发生变化）：
+
+    \textbf{a. 数据点分配（Assign Points）：}
+    将每个数据点分配到离它最近的质心所属的簇。这一步通过计算每个数据点与各个质心的距离，然后选择距离最近的质心来确定簇的分配。
+    
+    公式：
+    \[
+    \text{{label}}_i = \arg \min_k ||\text{{data}}_i - \text{{centroid}}_k||^2
+    \]
+    其中，\(\text{{label}}_i\) 是数据点 \(i\) 所属簇的标签，\(\text{{data}}_i\) 是数据点 \(i\) 的坐标，\(\text{{centroid}}_k\) 是第 \(k\) 个质心的坐标，\(|| \cdot ||^2\) 表示欧几里德距离的平方。
+
+    \textbf{b. 更新质心（Update Centroids）：}
+    对每个簇，计算该簇内所有数据点的均值，将均值作为新的质心位置。
+    
+    公式：
+    \[
+    \text{{centroid}}_k = \frac{1}{N_k} \sum_{i=1}^{N_k} \text{{data}}_i
+    \]
+    其中，\(N_k\) 是第 \(k\) 个簇的数据点个数。
+
+\textbf{3. 收敛判断：}
+在每次迭代后，检查质心是否发生变化。如果质心不再变化，或者达到了预定的迭代次数，算法停止迭代。
+
+以上步骤迭代进行，最终形成 \(k\) 个簇，每个簇包含一组相似的数据点。KMeans 算法的目标是使得簇内的数据点尽量相似，而簇间的数据点尽量不同。
+
+对于随机生成的二维数据集进行K-Means聚类（3或5个簇），可视化结果如下图所示：
+\begin{figure}[!htbp]
+    \centering
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=6cm]{image/kmeans2.png}
+        \caption{K-Means聚类结果（3个簇）}
+    \end{minipage}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=6cm]{image/kmeans.png}
+        \caption{K-Means聚类结果（5个簇）}
+    \end{minipage}
+    \label{fig:visualizaion}
+\end{figure}
+
+
+\subsection{实验内容2~基于密度聚类}
+\subsubsection{算法原理}
+MeanShift 算法目的是在一个平滑的样本密度中返现 blobs 。
+它是一种基于质心的算法，其工作原理是将候选质心的位置更新为给定区域内点的平均值。
+然后在后处理阶段对这些候选质心位置进行筛选，以消除近似重复，形成最终的质心集合。
+
+\subsubsection{代码及结果}
+\begin{lstlisting}[language=Python, caption={MeanShift算法实现}, label={code:meanshift}]
+class DBSCAN:
+    def __init__(self, eps=0.5, min_samples=5):
+        self.eps = eps
+        self.min_samples = min_samples
+
+    def fit(self, data):
+        self.data = data
+        self.labels_ = np.full(len(data), -1)  # -1 represents noise
+        self.cluster_label = 0
+        for i, point in enumerate(data):
+            if self.labels_[i] != -1:
+                continue
+            neighbors = self._region_query(point)
+            if len(neighbors) < self.min_samples:
+                self.labels_[i] = -1  # mark as noise
+            else:
+                self._expand_cluster(i, neighbors)
+
+    def _region_query(self, point):
+        return [j for j, other_point in enumerate(self.data) if np.linalg.norm(point - other_point) < self.eps]
+
+    def _expand_cluster(self, current_point, neighbors):
+        self.cluster_label += 1
+        self.labels_[current_point] = self.cluster_label
+        i = 0
+        while i < len(neighbors):
+            neighbor = neighbors[i]
+            if self.labels_[neighbor] == -1:
+                self.labels_[neighbor] = self.cluster_label
+            elif self.labels_[neighbor] == 0:
+                self.labels_[neighbor] = self.cluster_label
+                new_neighbors = self._region_query(self.data[neighbor])
+                if len(new_neighbors) >= self.min_samples:
+                    neighbors.extend(new_neighbors)
+            i += 1
+\end{lstlisting}
+以下为可视化结果：
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=6cm]{image/kmeans6.png}
+    \caption{DBSCAN聚类结果}
+    \label{fig:visualizaion}
+\end{figure}
+
+\subsection{实验内容3~基于层次聚类}
+\subsubsection{算法原理}
+层次聚类是一种通过连续合并或拆分内置聚类来构建最终聚类的聚类算法。
+聚类的层次结构表示为树(或树形图)。树的根是所有的样本中唯一的聚类，
+叶子是只有一个样本的集群。
+\subsubsection{代码及结果}
+以下为层次聚类算法的实现代码：
+\begin{lstlisting}[language=Python, caption={层次聚类算法实现}, label={code:hierarchical}]
+    import...
+    
+    class Hierarchical:
+        def __init__(self, n_clusters=2, linkage='ward'):
+            self.n_clusters = n_clusters
+            self.linkage = linkage
+    
+        def fit_predict(self, data):
+            linkage_matrix = sch.linkage(data, method=self.linkage)
+            labels = sch.fcluster(linkage_matrix, t=self.n_clusters, criterion='maxclust')
+            return labels
+\end{lstlisting}
+
+可以将表示聚类层次合并的树可视化为树状图。
+树状图的x轴表示样本，y轴表示聚类的距离。
+\begin{figure}[!htbp]
+    \centering
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=7cm]{image/kmeans3.png}
+        \caption{生成数据在二维空间可视化}
+    \end{minipage}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=7cm]{image/kmeans4.png}
+        \caption{层次聚类结果}
+    \end{minipage}
+    \label{fig:visualizaion}
+\end{figure}
+
+\section{总结与体会}
+通过本次实验，我掌握了聚类算法的原理和实现，熟悉了K-Means，基于密度聚类，和基于层次聚类的算法。
+在本次实验中，我比较了各种聚类算法的性能，了解各种算法的优缺点，提高了对数据分析和处理的能力。
+
+\end{document}
+
+
+
+
+\section{模板测试部分（实际编写时请删除）}
+
+如\coderef{code:example}所示，为示例代码。
+\begin{lstlisting}[language=Python, caption={示例代码}, label={code:example}]
+
+\end{lstlisting}
+
+
+如\figref{fig:example}所示，为上海大学校徽。
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{image/shulogo.png}
+    \caption{上海大学校徽}
+    \label{fig:example}
+\end{figure}
+
+如\tabref{tab:example}所示，为测试表。
+\begin{table}[!htbp]
+    \caption{测试表}
+    \label{tab:example}
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+            & value\\
+        \midrule
+        1   & 1     \\
+        2   & 2     \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\textbf{说明}：叙述各个实验任务的过程和结果，着重说明各个实验所反映的
+操作系统设计原理，加以评述。
+
+\begin{itemize}
+    \item 
+    \item 
+    \item 
+\end{itemize}
+
+\begin{enumerate}
+    \item 
+    \item 
+    \item 
+\end{enumerate}
