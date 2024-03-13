@@ -1,0 +1,420 @@
+kah295@raspberrypi:~ $ cd ~/src/ElasticTrainer
+kah295@raspberrypi:~/src/ElasticTrainer $ . ../kai_stl_code/venv/bin/activate
+(venv) kah295@raspberrypi:~/src/ElasticTrainer $ ./run_figure16_ego.sh
+Profile 'logs/resnet50_224_200_4_profile' already exists
+Extracted timing info 'profile_extracted/resnet50_224_200_4_profile' already exists
+# model trainbles: 214
+# t_dw: 214, # t_dy: 214
+### Porting NN model...
+### Porting dataset...
+.1
+...entering load.builder()...0.0, name: caltech_birds2011
+load.builder()...0.1, kwargs: {'data_dir': None}
+load.builder()...0.2
+load.builder()...0.3
+load.builder()... 0.3+: before builder_cls()
+builder_cls(): 0
+builder_cls(): 1
+builder_cls(): 3
+imported_builder_cls: (): 0.0 name is : caltech_birds2011
+load.builder()... 0.3+: after builder_cls(), cls is: <class 'tensorflow_datasets.image_classification.caltech_birds.CaltechBirds2011'>
+load.builder()...0.4
+load.builder()...0.5: before call cls()...
+load.builder()...0.5: type of cls is: <class 'abc.ABCMeta'>
+load.builder()...0.5: builder_kwargs is: {'data_dir': None}
+DBG: DatasetBuilder: init()...
+DBG: DatasetBuilder: init() step_2...
+DBG: DatasetBuilder: init() step_2.1 ...
+DBG: DatasetBuilder: self._data_dir is: /home/kah295/tensorflow_datasets/caltech_birds2011/0.1.1
+DBG: read_from_dir(): before loading metadata...
+DBG: read_from_dir(): v2 ...
+DBG: read_from_dir(): v3 ...
+DBG: read_from_dir(): v4 ...
+DBG: read_from_dir(): v5 ...
+DBG: read_from_dir(): v6 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f60367e50>|, |caltech_birds2011|, |caltech_birds2011|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |description|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f6046cc10>|, |Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos 
+of 200 bird species (mostly North American). The total number of 
+categories of birds is 200 and there are 6033 images in the 2010 
+dataset and 11,788 images in the 2011 dataset.
+Annotations include bounding boxes, segmentation labels.|, |Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos 
+of 200 bird species (mostly North American). The total number of 
+categories of birds is 200 and there are 6033 images in the 2010 
+dataset and 11,788 images in the 2011 dataset.
+Annotations include bounding boxes, segmentation labels.|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |version|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f6046c4c0>|, |0.1.1|, |0.1.1|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |release_notes|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f6046c820>|, |{}|, |{}|; types: |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|, |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |config_name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f604e0b80>|, ||, ||; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |config_description|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f604e08b0>|, ||, ||; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |features|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f60339970>|, ||, ||; types: |<class 'feature_pb2.Feature'>|, |<class 'feature_pb2.Feature'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |citation|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f60339c10>|, |@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}|, |@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |size_in_bytes|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f60339bb0>|, |0|, |0|; types: |<class 'int'>|, |<class 'int'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |download_size|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f60339ee0>|, |0|, |1189858222|; types: |<class 'int'>|, |<class 'int'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |location|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f603397c0>|, |urls: "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+|, |urls: "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+|; types: |<class 'dataset_info_pb2.DatasetLocation'>|, |<class 'dataset_info_pb2.DatasetLocation'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |download_checksums|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f60339a00>|, |{}|, |{}|; types: |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|, |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |schema|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f603398b0>|, ||, ||; types: |<class 'tensorflow_metadata.proto.v0.schema_pb2.Schema'>|, |<class 'tensorflow_metadata.proto.v0.schema_pb2.Schema'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |splits|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f60339f70>|, |[name: "train"
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+num_bytes: 607083635
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+, name: "test"
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+num_bytes: 587077607
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+]|, |[name: "train"
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+num_bytes: 607083635
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+, name: "test"
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+num_bytes: 587077607
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+]|; types: |<class 'google.protobuf.pyext._message.RepeatedCompositeContainer'>|, |<class 'google.protobuf.pyext._message.RepeatedCompositeContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |supervised_keys|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f60339ca0>|, |tuple {
+  items {
+    feature_key: "image"
+  }
+  items {
+    feature_key: "label"
+  }
+}
+|, |tuple {
+  items {
+    feature_key: "image"
+  }
+  items {
+    feature_key: "label"
+  }
+}
+|; types: |<class 'dataset_info_pb2.SupervisedKeys'>|, |<class 'dataset_info_pb2.SupervisedKeys'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |redistribution_info|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f60339a90>|, ||, ||; types: |<class 'dataset_info_pb2.RedistributionInfo'>|, |<class 'dataset_info_pb2.RedistributionInfo'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |module_name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f603392b0>|, |tensorflow_datasets.image_classification.caltech_birds|, |tensorflow_datasets.image_classification.caltech_birds|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |disable_shuffling|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f603396a0>|, |False|, |False|; types: |<class 'bool'>|, |<class 'bool'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |file_format|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f60339d90>|, ||, |tfrecord|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: DatasetBuilder: init() step_2.1 END!...
+DBG: DatasetBuilder: init() finished!
+.1.5
+.1.6
+.1.7
+.2
+.3
+.4
+### Start training...
+# model trainbles: 214
+# t_dw: 214, # t_dy: 214
+RUNID: CUB200_ElasticTrainer
+m: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]
+max importance: 4.310274
+%T_sel: 26.472433200583147
+epoch 1/12: 100%|#########################| 1499/1499 [2:02:01<00:00,  4.88s/it]
+per epoch time(s) excluding validation: 7393.5393986701965
+=================================
+acc:  tf.Tensor(0.0405592, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11336.68739938736
+epoch 2/12: 100%|#######################################################################################################| 1499/1499 [2:02:46<00:00,  4.91s/it]
+per epoch time(s) excluding validation: 7366.796303510666
+=================================
+acc:  tf.Tensor(0.31135657, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11433.740391016006
+epoch 3/12: 100%|#######################################################################################################| 1499/1499 [2:06:38<00:00,  5.07s/it]
+per epoch time(s) excluding validation: 7598.877367734909
+=================================
+acc:  tf.Tensor(0.47462893, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11500.164654254913
+epoch 4/12: 100%|#######################################################################################################| 1499/1499 [2:02:09<00:00,  4.89s/it]
+per epoch time(s) excluding validation: 7329.254384994507
+=================================
+acc:  tf.Tensor(0.55022436, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11234.319799423218
+m: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]
+max importance: 5.5456076
+%T_sel: 26.472433200583147
+epoch 5/12: 100%|#######################################################################################################| 1499/1499 [2:03:47<00:00,  4.96s/it]
+per epoch time(s) excluding validation: 7461.935482263565
+=================================
+acc:  tf.Tensor(0.5995858, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11433.22369670868
+epoch 6/12: 100%|#######################################################################################################| 1499/1499 [2:02:26<00:00,  4.90s/it]
+per epoch time(s) excluding validation: 7346.787629842758
+=================================
+acc:  tf.Tensor(0.6218502, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11463.827400922775
+epoch 7/12: 100%|#######################################################################################################| 1499/1499 [2:13:03<00:00,  5.33s/it]
+per epoch time(s) excluding validation: 7983.04576587677
+=================================
+acc:  tf.Tensor(0.6473939, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 12174.674331665039
+epoch 8/12: 100%|#######################################################################################################| 1499/1499 [2:09:50<00:00,  5.20s/it]
+per epoch time(s) excluding validation: 7790.111156463623
+=================================
+acc:  tf.Tensor(0.6639627, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11876.448403596878
+m: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 1 1 1 1 1 1 1 1 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 1 1 1 1 1 1 1 1 0 1 0 1 1 1 1 1 1
+ 1 1 1 0 1 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]
+max importance: 1.2338707
+%T_sel: 27.097646718819824
+epoch 9/12: 100%|#######################################################################################################| 1499/1499 [2:06:53<00:00,  5.08s/it]
+per epoch time(s) excluding validation: 7648.638517141342
+=================================
+acc:  tf.Tensor(0.6763894, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11634.292314529419
+epoch 10/12: 100%|######################################################################################################| 1499/1499 [2:05:21<00:00,  5.02s/it]
+per epoch time(s) excluding validation: 7521.115646123886
+=================================
+acc:  tf.Tensor(0.68570936, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11298.80602812767
+epoch 11/12: 100%|######################################################################################################| 1499/1499 [1:55:09<00:00,  4.61s/it]
+per epoch time(s) excluding validation: 6909.017802238464
+per epoch time(s) including validation: 10538.21650671959
+epoch 12/12: 100%|######################################################################################################| 1499/1499 [1:57:36<00:00,  4.71s/it]
+per epoch time(s) excluding validation: 7056.1757225990295
+per epoch time(s) including validation: 10938.497309923172
+===============================================
+Training Type: ElasticTrainer
+Accuracy (%): 68.57
+Time (h): 24.83
+===============================================
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+Warmup...
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:22<00:00, 11.25s/it]
+Profiling the model...
+2023-10-15 10:39:46.064871: I tensorflow/core/profiler/lib/profiler_session.cc:110] Profiler session initializing.
+2023-10-15 10:39:46.064986: I tensorflow/core/profiler/lib/profiler_session.cc:125] Profiler session started.
+2023-10-15 10:40:28.381580: I tensorflow/core/profiler/lib/profiler_session.cc:67] Profiler session collecting data.
+2023-10-15 10:40:28.477254: I tensorflow/core/profiler/lib/profiler_session.cc:143] Profiler session tear down.
+2023-10-15 10:40:28.600280: I tensorflow/core/profiler/rpc/client/save_profile.cc:136] Creating directory: logs/resnet50_224_37_4_profile/plugins/profile/2023_10_15_10_40_28
+
+2023-10-15 10:40:28.687986: I tensorflow/core/profiler/rpc/client/save_profile.cc:142] Dumped gzipped tool data for trace.json.gz to logs/resnet50_224_37_4_profile/plugins/profile/2023_10_15_10_40_28/raspberrypi.trace.json.gz
+2023-10-15 10:40:28.809475: I tensorflow/core/profiler/rpc/client/save_profile.cc:136] Creating directory: logs/resnet50_224_37_4_profile/plugins/profile/2023_10_15_10_40_28
+
+2023-10-15 10:40:28.809963: I tensorflow/core/profiler/rpc/client/save_profile.cc:142] Dumped gzipped tool data for memory_profile.json.gz to logs/resnet50_224_37_4_profile/plugins/profile/2023_10_15_10_40_28/raspberrypi.memory_profile.json.gz
+2023-10-15 10:40:28.814504: I tensorflow/core/profiler/rpc/client/capture_profile.cc:251] Creating directory: logs/resnet50_224_37_4_profile/plugins/profile/2023_10_15_10_40_28
+Dumped tool data for xplane.pb to logs/resnet50_224_37_4_profile/plugins/profile/2023_10_15_10_40_28/raspberrypi.xplane.pb
+Dumped tool data for overview_page.pb to logs/resnet50_224_37_4_profile/plugins/profile/2023_10_15_10_40_28/raspberrypi.overview_page.pb
+Dumped tool data for input_pipeline.pb to logs/resnet50_224_37_4_profile/plugins/profile/2023_10_15_10_40_28/raspberrypi.input_pipeline.pb
+Dumped tool data for tensorflow_stats.pb to logs/resnet50_224_37_4_profile/plugins/profile/2023_10_15_10_40_28/raspberrypi.tensorflow_stats.pb
+Dumped tool data for kernel_stats.pb to logs/resnet50_224_37_4_profile/plugins/profile/2023_10_15_10_40_28/raspberrypi.kernel_stats.pb
+
+Finished profiling!
+Elasped time (s): 42.761136293411255
+# model trainbles: 214
+# t_dw: 214, # t_dy: 214
+Traceback (most recent call last):
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/directory_watcher.py", line 88, in Load
+    for event in self._LoadInternal():
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/directory_watcher.py", line 110, in _LoadInternal
+    self._InitializeLoader()
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/directory_watcher.py", line 173, in _InitializeLoader
+    path = self._GetNextPath()
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/directory_watcher.py", line 210, in _GetNextPath
+    for path in io_wrapper.ListDirectoryAbsolute(self._directory)
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/io_wrapper.py", line 78, in ListDirectoryAbsolute
+    os.path.join(directory, path) for path in tf.io.gfile.listdir(directory)
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorflow/python/lib/io/file_io.py", line 770, in list_directory_v2
+    raise errors.NotFoundError(
+tensorflow.python.framework.errors_impl.NotFoundError: Could not find directory logs/PET37_ElasticTrainer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kah295/src/ElasticTrainer/plot_curves.py", line 180, in <module>
+    main()
+  File "/home/kah295/src/ElasticTrainer/plot_curves.py", line 160, in main
+    plot_single_curve(
+  File "/home/kah295/src/ElasticTrainer/plot_curves.py", line 60, in plot_single_curve
+    et_x, et_y = read_data_from_tfboard_logs(path_to_elastic_training, x_tag, y_tag)
+  File "/home/kah295/src/ElasticTrainer/plot_curves.py", line 28, in read_data_from_tfboard_logs
+    event_acc.Reload()
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/event_accumulator.py", line 246, in Reload
+    for event in self._generator.Load():
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/directory_watcher.py", line 92, in Load
+    raise DirectoryDeletedError(
+tensorboard.backend.event_processing.directory_watcher.DirectoryDeletedError: Directory logs/PET37_ElasticTrainer has been permanently deleted
+Traceback (most recent call last):
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/directory_watcher.py", line 88, in Load
+    for event in self._LoadInternal():
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/directory_watcher.py", line 110, in _LoadInternal
+    self._InitializeLoader()
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/directory_watcher.py", line 173, in _InitializeLoader
+    path = self._GetNextPath()
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/directory_watcher.py", line 210, in _GetNextPath
+    for path in io_wrapper.ListDirectoryAbsolute(self._directory)
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/io_wrapper.py", line 78, in ListDirectoryAbsolute
+    os.path.join(directory, path) for path in tf.io.gfile.listdir(directory)
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorflow/python/lib/io/file_io.py", line 770, in list_directory_v2
+    raise errors.NotFoundError(
+tensorflow.python.framework.errors_impl.NotFoundError: Could not find directory logs/PET37_ElasticTrainer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kah295/src/ElasticTrainer/plot_curves.py", line 180, in <module>
+    main()
+  File "/home/kah295/src/ElasticTrainer/plot_curves.py", line 160, in main
+    plot_single_curve(
+  File "/home/kah295/src/ElasticTrainer/plot_curves.py", line 60, in plot_single_curve
+    et_x, et_y = read_data_from_tfboard_logs(path_to_elastic_training, x_tag, y_tag)
+  File "/home/kah295/src/ElasticTrainer/plot_curves.py", line 28, in read_data_from_tfboard_logs
+    event_acc.Reload()
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/event_accumulator.py", line 246, in Reload
+    for event in self._generator.Load():
+  File "/home/kah295/src/kai_stl_code/venv/lib/python3.9/site-packages/tensorboard/backend/event_processing/directory_watcher.py", line 92, in Load
+    raise DirectoryDeletedError(
+tensorboard.backend.event_processing.directory_watcher.DirectoryDeletedError: Directory logs/PET37_ElasticTrainer has been permanently deleted
+(venv) kah295@raspberrypi:~/src/ElasticTrainer $ 

@@ -1,0 +1,4 @@
+imgs/
+*.pth
+result/last_checkpoint
+mmsegmentation/

@@ -1,0 +1,17 @@
+{
+  "promptDelete": false,
+  "alwaysUpdateLinks": true,
+  "strictLineBreaks": true,
+  "newFileLocation": "current",
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "showUnsupportedFiles": true,
+  "attachmentFolderPath": "./",
+  "userIgnoreFilters": [
+    "CommunistFiles/",
+    "other/",
+    "First/",
+    "Second/"
+  ],
+  "livePreview": false
+}

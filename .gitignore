@@ -1,0 +1,101 @@
+# >>>Files_Not_For_Share.gitignore Begin<<<
+Books/
+First/
+other/
+CommunistFiles/
+# >>>Files_Not_For_Share.gitignore End<<<
+
+# >>>Obsdian.gitignore Begin<<<
+# to only exclude plugin configuration. Might be useful to prevent some plugin from exposing sensitive data
+.obsidian/plugins
+
+# OR only to exclude workspace cache
+.obsidian/workspace.json
+
+# to exclude workspace cache specific to mobile devices
+.obsidian/workspace-mobile.json
+
+# Add below lines to exclude OS settings and caches
+.trash/
+.DS_Store
+# >>>Obsdian.gitignore End<<<
+
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+*.mp4
+*.mp3
+*.m4a
+*.wav
+
+# Office files
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.xls
+*.xlsx
+
+# >>>C++.gitignore Begin<<<
+# Prerequisites
+*.d
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+# Precompiled Headers
+*.gch
+*.pch
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+# Fortran module files
+*.mod
+*.smod
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+# Executables
+*.exe
+*.out
+*.app
+# >>>C++.gitignore End<<<
+
+# >>>VisualStudioCode.gitignore Begin<<<
+**/.vscode/
+# Local History for Visual Studio Code
+**/.history/
+# Built Visual Studio Code Extensions
+*.vsix
+# >>>VisualStudioCode.gitignore End<<<
+
+# >>>Intellij.gitignore Begin<<<
+*.ipr
+*.iml
+*.iws
+**/.idea/
+**/build/
+**/cmake-build-debug/
+# >>>Intellij.gitignore End<<<
+
+# >>>JupyterNotebooks.gitignore Begin<<<
+# gitignore template for Jupyter Notebooks
+# website: http://jupyter.org/
+
+.ipynb_checkpoints
+**/.ipynb_checkpoints/*
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Remove previous ipynb_checkpoints
+#   git rm -r .ipynb_checkpoints/
+# >>>JupyterNotebooks.gitignore End<<<

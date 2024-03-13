@@ -1,0 +1,21 @@
+### 资料
+courseware
+# others
+*.rar
+*.zip
+*.pdf
+*.docx
+.DS_Store
+
+### C++
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Executables
+*.exe
+.*
+!/.gitignore
+CMakeSettings.json

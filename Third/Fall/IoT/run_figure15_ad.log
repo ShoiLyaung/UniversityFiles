@@ -1,0 +1,1180 @@
+kah295@raspberrypi:~ $ cd ~/src/ElasticTrainer
+kah295@raspberrypi:~/src/ElasticTrainer $ . ../kai_stl_code/venv/bin/activate
+(venv) kah295@raspberrypi:~/src/ElasticTrainer $ ./run_figure15ad.sh
+Profile 'logs/resnet50_224_200_4_profile' already exists
+Extracted timing info 'profile_extracted/resnet50_224_200_4_profile' already exists
+# model trainbles: 214
+# t_dw: 214, # t_dy: 214
+### Porting NN model...
+### Porting dataset...
+.1
+...entering load.builder()...0.0, name: caltech_birds2011
+load.builder()...0.1, kwargs: {'data_dir': None}
+load.builder()...0.2
+load.builder()...0.3
+load.builder()... 0.3+: before builder_cls()
+builder_cls(): 0
+builder_cls(): 1
+builder_cls(): 3
+imported_builder_cls: (): 0.0 name is : caltech_birds2011
+load.builder()... 0.3+: after builder_cls(), cls is: <class 'tensorflow_datasets.image_classification.caltech_birds.CaltechBirds2011'>
+load.builder()...0.4
+load.builder()...0.5: before call cls()...
+load.builder()...0.5: type of cls is: <class 'abc.ABCMeta'>
+load.builder()...0.5: builder_kwargs is: {'data_dir': None}
+DBG: DatasetBuilder: init()...
+DBG: DatasetBuilder: init() step_2...
+DBG: DatasetBuilder: init() step_2.1 ...
+DBG: DatasetBuilder: self._data_dir is: /home/kah295/tensorflow_datasets/caltech_birds2011/0.1.1
+DBG: read_from_dir(): before loading metadata...
+DBG: read_from_dir(): v2 ...
+DBG: read_from_dir(): v3 ...
+DBG: read_from_dir(): v4 ...
+DBG: read_from_dir(): v5 ...
+DBG: read_from_dir(): v6 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e7fe50>|, |caltech_birds2011|, |caltech_birds2011|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |description|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28f84c10>|, |Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos 
+of 200 bird species (mostly North American). The total number of 
+categories of birds is 200 and there are 6033 images in the 2010 
+dataset and 11,788 images in the 2011 dataset.
+Annotations include bounding boxes, segmentation labels.|, |Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos 
+of 200 bird species (mostly North American). The total number of 
+categories of birds is 200 and there are 6033 images in the 2010 
+dataset and 11,788 images in the 2011 dataset.
+Annotations include bounding boxes, segmentation labels.|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |version|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28f844c0>|, |0.1.1|, |0.1.1|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |release_notes|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28f84820>|, |{}|, |{}|; types: |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|, |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |config_name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28ff9b80>|, ||, ||; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |config_description|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28ff98b0>|, ||, ||; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |features|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e517f0>|, ||, ||; types: |<class 'feature_pb2.Feature'>|, |<class 'feature_pb2.Feature'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |citation|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e51a00>|, |@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}|, |@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |size_in_bytes|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e518b0>|, |0|, |0|; types: |<class 'int'>|, |<class 'int'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |download_size|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e51f70>|, |0|, |1189858222|; types: |<class 'int'>|, |<class 'int'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |location|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e51ca0>|, |urls: "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+|, |urls: "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+|; types: |<class 'dataset_info_pb2.DatasetLocation'>|, |<class 'dataset_info_pb2.DatasetLocation'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |download_checksums|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e51a90>|, |{}|, |{}|; types: |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|, |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |schema|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e512b0>|, ||, ||; types: |<class 'tensorflow_metadata.proto.v0.schema_pb2.Schema'>|, |<class 'tensorflow_metadata.proto.v0.schema_pb2.Schema'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |splits|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e516a0>|, |[name: "train"
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+num_bytes: 607083635
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+, name: "test"
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+num_bytes: 587077607
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+]|, |[name: "train"
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+num_bytes: 607083635
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+, name: "test"
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+num_bytes: 587077607
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+]|; types: |<class 'google.protobuf.pyext._message.RepeatedCompositeContainer'>|, |<class 'google.protobuf.pyext._message.RepeatedCompositeContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |supervised_keys|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e51d90>|, |tuple {
+  items {
+    feature_key: "image"
+  }
+  items {
+    feature_key: "label"
+  }
+}
+|, |tuple {
+  items {
+    feature_key: "image"
+  }
+  items {
+    feature_key: "label"
+  }
+}
+|; types: |<class 'dataset_info_pb2.SupervisedKeys'>|, |<class 'dataset_info_pb2.SupervisedKeys'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |redistribution_info|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e51ac0>|, ||, ||; types: |<class 'dataset_info_pb2.RedistributionInfo'>|, |<class 'dataset_info_pb2.RedistributionInfo'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |module_name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e51970>|, |tensorflow_datasets.image_classification.caltech_birds|, |tensorflow_datasets.image_classification.caltech_birds|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |disable_shuffling|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e51c10>|, |False|, |False|; types: |<class 'bool'>|, |<class 'bool'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |file_format|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f28e51bb0>|, ||, |tfrecord|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: DatasetBuilder: init() step_2.1 END!...
+DBG: DatasetBuilder: init() finished!
+.1.5
+.1.6
+.1.7
+.2
+.3
+.4
+### Start training...
+# model trainbles: 214
+# t_dw: 214, # t_dy: 214
+RUNID: CUB200_ElasticTrainer
+m: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]
+max importance: 3.6194754
+%T_sel: 26.472433200583147
+epoch 1/12: 100%|#######################################################################################################| 1499/1499 [2:05:24<00:00,  5.02s/it]
+per epoch time(s) excluding validation: 7595.62012720108
+=================================
+acc:  tf.Tensor(0.08974802, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11719.694077253342
+epoch 2/12: 100%|#######################################################################################################| 1499/1499 [2:07:29<00:00,  5.10s/it]
+per epoch time(s) excluding validation: 7649.078074932098
+=================================
+acc:  tf.Tensor(0.40645495, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11707.96887254715
+epoch 3/12: 100%|#######################################################################################################| 1499/1499 [2:02:32<00:00,  4.90s/it]
+per epoch time(s) excluding validation: 7352.249535083771
+=================================
+acc:  tf.Tensor(0.5134622, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11176.057742834091
+epoch 4/12: 100%|#######################################################################################################| 1499/1499 [1:56:57<00:00,  4.68s/it]
+per epoch time(s) excluding validation: 7017.097699642181
+=================================
+acc:  tf.Tensor(0.56834656, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 10761.400079965591
+m: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]
+max importance: 3.7830846
+%T_sel: 26.472433200583147
+epoch 5/12: 100%|#######################################################################################################| 1499/1499 [2:02:44<00:00,  4.91s/it]
+per epoch time(s) excluding validation: 7399.301262140274
+=================================
+acc:  tf.Tensor(0.60459095, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11421.365901708603
+epoch 6/12: 100%|#######################################################################################################| 1499/1499 [2:05:03<00:00,  5.01s/it]
+per epoch time(s) excluding validation: 7503.214209794998
+=================================
+acc:  tf.Tensor(0.6213324, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11346.78683924675
+epoch 7/12: 100%|#######################################################################################################| 1499/1499 [1:57:53<00:00,  4.72s/it]
+per epoch time(s) excluding validation: 7073.387899398804
+=================================
+acc:  tf.Tensor(0.65153605, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 10810.45913887024
+epoch 8/12: 100%|#######################################################################################################| 1499/1499 [2:03:10<00:00,  4.93s/it]
+per epoch time(s) excluding validation: 7390.479842424393
+=================================
+acc:  tf.Tensor(0.6665516, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11647.032807826996
+m: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]
+max importance: 6.8855457
+%T_sel: 26.472433200583147
+epoch 9/12: 100%|#######################################################################################################| 1499/1499 [2:04:39<00:00,  4.99s/it]
+per epoch time(s) excluding validation: 7520.900968074799
+=================================
+acc:  tf.Tensor(0.6769071, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11399.408789634705
+epoch 10/12: 100%|######################################################################################################| 1499/1499 [2:09:58<00:00,  5.20s/it]
+per epoch time(s) excluding validation: 7798.065833330154
+=================================
+acc:  tf.Tensor(0.6851916, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 12021.730836868286
+epoch 11/12: 100%|######################################################################################################| 1499/1499 [2:13:49<00:00,  5.36s/it]
+per epoch time(s) excluding validation: 8029.17630815506
+=================================
+acc:  tf.Tensor(0.69192266, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11957.729544639587
+epoch 12/12: 100%|######################################################################################################| 1499/1499 [2:00:37<00:00,  4.83s/it]
+per epoch time(s) excluding validation: 7237.284037590027
+=================================
+acc:  tf.Tensor(0.69244045, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 11111.24058175087
+===============================================
+Training Type: ElasticTrainer
+Accuracy (%): 69.24
+Time (h): 24.88
+===============================================
+### Porting NN model...
+### Porting dataset...
+.1
+...entering load.builder()...0.0, name: caltech_birds2011
+load.builder()...0.1, kwargs: {'data_dir': None}
+load.builder()...0.2
+load.builder()...0.3
+load.builder()... 0.3+: before builder_cls()
+builder_cls(): 0
+builder_cls(): 1
+builder_cls(): 3
+imported_builder_cls: (): 0.0 name is : caltech_birds2011
+load.builder()... 0.3+: after builder_cls(), cls is: <class 'tensorflow_datasets.image_classification.caltech_birds.CaltechBirds2011'>
+load.builder()...0.4
+load.builder()...0.5: before call cls()...
+load.builder()...0.5: type of cls is: <class 'abc.ABCMeta'>
+load.builder()...0.5: builder_kwargs is: {'data_dir': None}
+DBG: DatasetBuilder: init()...
+DBG: DatasetBuilder: init() step_2...
+DBG: DatasetBuilder: init() step_2.1 ...
+DBG: DatasetBuilder: self._data_dir is: /home/kah295/tensorflow_datasets/caltech_birds2011/0.1.1
+DBG: read_from_dir(): before loading metadata...
+DBG: read_from_dir(): v2 ...
+DBG: read_from_dir(): v3 ...
+DBG: read_from_dir(): v4 ...
+DBG: read_from_dir(): v5 ...
+DBG: read_from_dir(): v6 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e542e50>|, |caltech_birds2011|, |caltech_birds2011|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |description|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e647c10>|, |Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos 
+of 200 bird species (mostly North American). The total number of 
+categories of birds is 200 and there are 6033 images in the 2010 
+dataset and 11,788 images in the 2011 dataset.
+Annotations include bounding boxes, segmentation labels.|, |Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos 
+of 200 bird species (mostly North American). The total number of 
+categories of birds is 200 and there are 6033 images in the 2010 
+dataset and 11,788 images in the 2011 dataset.
+Annotations include bounding boxes, segmentation labels.|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |version|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e6474c0>|, |0.1.1|, |0.1.1|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |release_notes|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e647820>|, |{}|, |{}|; types: |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|, |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |config_name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e6bcb80>|, ||, ||; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |config_description|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e6bc8b0>|, ||, ||; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |features|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e5149d0>|, ||, ||; types: |<class 'feature_pb2.Feature'>|, |<class 'feature_pb2.Feature'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |citation|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e514c10>|, |@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}|, |@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |size_in_bytes|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e514bb0>|, |0|, |0|; types: |<class 'int'>|, |<class 'int'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |download_size|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e514ee0>|, |0|, |1189858222|; types: |<class 'int'>|, |<class 'int'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |location|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e5147c0>|, |urls: "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+|, |urls: "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+|; types: |<class 'dataset_info_pb2.DatasetLocation'>|, |<class 'dataset_info_pb2.DatasetLocation'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |download_checksums|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e514a00>|, |{}|, |{}|; types: |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|, |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |schema|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e5148b0>|, ||, ||; types: |<class 'tensorflow_metadata.proto.v0.schema_pb2.Schema'>|, |<class 'tensorflow_metadata.proto.v0.schema_pb2.Schema'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |splits|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e514f70>|, |[name: "train"
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+num_bytes: 607083635
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+, name: "test"
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+num_bytes: 587077607
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+]|, |[name: "train"
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+num_bytes: 607083635
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+, name: "test"
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+num_bytes: 587077607
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+]|; types: |<class 'google.protobuf.pyext._message.RepeatedCompositeContainer'>|, |<class 'google.protobuf.pyext._message.RepeatedCompositeContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |supervised_keys|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e514ca0>|, |tuple {
+  items {
+    feature_key: "image"
+  }
+  items {
+    feature_key: "label"
+  }
+}
+|, |tuple {
+  items {
+    feature_key: "image"
+  }
+  items {
+    feature_key: "label"
+  }
+}
+|; types: |<class 'dataset_info_pb2.SupervisedKeys'>|, |<class 'dataset_info_pb2.SupervisedKeys'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |redistribution_info|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e514a90>|, ||, ||; types: |<class 'dataset_info_pb2.RedistributionInfo'>|, |<class 'dataset_info_pb2.RedistributionInfo'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |module_name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e5147f0>|, |tensorflow_datasets.image_classification.caltech_birds|, |tensorflow_datasets.image_classification.caltech_birds|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |disable_shuffling|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e5146a0>|, |False|, |False|; types: |<class 'bool'>|, |<class 'bool'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |file_format|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f4e514d90>|, ||, |tfrecord|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: DatasetBuilder: init() step_2.1 END!...
+DBG: DatasetBuilder: init() finished!
+.1.5
+.1.6
+.1.7
+.2
+.3
+.4
+### Start training...
+RUNID: CUB200_Full_training
+epoch 1/12: 100%|#######################################################################################################| 1499/1499 [3:53:24<00:00,  9.34s/it]
+per epoch time(s) excluding validation: 14004.80019235611
+=================================
+acc:  tf.Tensor(0.04798067, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 18272.99259376526
+epoch 2/12: 100%|#######################################################################################################| 1499/1499 [3:59:31<00:00,  9.59s/it]
+per epoch time(s) excluding validation: 14371.522755384445
+=================================
+acc:  tf.Tensor(0.24508111, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 18673.908853530884
+epoch 3/12: 100%|#######################################################################################################| 1499/1499 [4:05:39<00:00,  9.83s/it]
+per epoch time(s) excluding validation: 14739.189095020294
+=================================
+acc:  tf.Tensor(0.4033483, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 18811.743762254715
+epoch 4/12: 100%|#######################################################################################################| 1499/1499 [3:55:47<00:00,  9.44s/it]
+per epoch time(s) excluding validation: 14147.81602358818
+=================================
+acc:  tf.Tensor(0.5069037, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 18043.67643070221
+epoch 5/12: 100%|#######################################################################################################| 1499/1499 [3:54:27<00:00,  9.38s/it]
+per epoch time(s) excluding validation: 14067.65276169777
+=================================
+acc:  tf.Tensor(0.55281323, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 18115.542542934418
+epoch 6/12: 100%|#######################################################################################################| 1499/1499 [3:48:18<00:00,  9.14s/it]
+per epoch time(s) excluding validation: 13698.633937835693
+=================================
+acc:  tf.Tensor(0.5787021, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 17375.95180773735
+epoch 7/12: 100%|#######################################################################################################| 1499/1499 [3:38:32<00:00,  8.75s/it]
+per epoch time(s) excluding validation: 13112.928521156311
+=================================
+acc:  tf.Tensor(0.629962, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 16837.169068574905
+epoch 8/12: 100%|#######################################################################################################| 1499/1499 [3:49:22<00:00,  9.18s/it]
+per epoch time(s) excluding validation: 13762.375284433365
+=================================
+acc:  tf.Tensor(0.6555057, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 17689.84921979904
+epoch 9/12: 100%|#######################################################################################################| 1499/1499 [4:08:41<00:00,  9.95s/it]
+per epoch time(s) excluding validation: 14921.762106657028
+=================================
+acc:  tf.Tensor(0.6808768, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 18888.53589773178
+epoch 10/12: 100%|######################################################################################################| 1499/1499 [3:55:32<00:00,  9.43s/it]
+per epoch time(s) excluding validation: 14132.99186372757
+=================================
+acc:  tf.Tensor(0.68812567, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 18285.790706157684
+epoch 11/12: 100%|######################################################################################################| 1499/1499 [3:45:45<00:00,  9.04s/it]
+per epoch time(s) excluding validation: 13545.682167768478
+=================================
+acc:  tf.Tensor(0.6957197, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 17398.240929365158
+epoch 12/12: 100%|######################################################################################################| 1499/1499 [3:52:20<00:00,  9.30s/it]
+per epoch time(s) excluding validation: 13940.081713914871
+=================================
+acc:  tf.Tensor(0.70141524, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 17853.514916181564
+===============================================
+Training Type: Full training
+Accuracy (%): 70.14
+Time (h): 46.79
+===============================================
+### Porting NN model...
+### Porting dataset...
+.1
+...entering load.builder()...0.0, name: caltech_birds2011
+load.builder()...0.1, kwargs: {'data_dir': None}
+load.builder()...0.2
+load.builder()...0.3
+load.builder()... 0.3+: before builder_cls()
+builder_cls(): 0
+builder_cls(): 1
+builder_cls(): 3
+imported_builder_cls: (): 0.0 name is : caltech_birds2011
+load.builder()... 0.3+: after builder_cls(), cls is: <class 'tensorflow_datasets.image_classification.caltech_birds.CaltechBirds2011'>
+load.builder()...0.4
+load.builder()...0.5: before call cls()...
+load.builder()...0.5: type of cls is: <class 'abc.ABCMeta'>
+load.builder()...0.5: builder_kwargs is: {'data_dir': None}
+DBG: DatasetBuilder: init()...
+DBG: DatasetBuilder: init() step_2...
+DBG: DatasetBuilder: init() step_2.1 ...
+DBG: DatasetBuilder: self._data_dir is: /home/kah295/tensorflow_datasets/caltech_birds2011/0.1.1
+DBG: read_from_dir(): before loading metadata...
+DBG: read_from_dir(): v2 ...
+DBG: read_from_dir(): v3 ...
+DBG: read_from_dir(): v4 ...
+DBG: read_from_dir(): v5 ...
+DBG: read_from_dir(): v6 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f38184e50>|, |caltech_birds2011|, |caltech_birds2011|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |description|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f38289c10>|, |Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos 
+of 200 bird species (mostly North American). The total number of 
+categories of birds is 200 and there are 6033 images in the 2010 
+dataset and 11,788 images in the 2011 dataset.
+Annotations include bounding boxes, segmentation labels.|, |Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos 
+of 200 bird species (mostly North American). The total number of 
+categories of birds is 200 and there are 6033 images in the 2010 
+dataset and 11,788 images in the 2011 dataset.
+Annotations include bounding boxes, segmentation labels.|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |version|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f382894c0>|, |0.1.1|, |0.1.1|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |release_notes|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f38289820>|, |{}|, |{}|; types: |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|, |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |config_name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f382fdb80>|, ||, ||; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |config_description|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f382fd8b0>|, ||, ||; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |features|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f381567f0>|, ||, ||; types: |<class 'feature_pb2.Feature'>|, |<class 'feature_pb2.Feature'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |citation|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f38156a00>|, |@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}|, |@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |size_in_bytes|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f381568b0>|, |0|, |0|; types: |<class 'int'>|, |<class 'int'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |download_size|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f38156f70>|, |0|, |1189858222|; types: |<class 'int'>|, |<class 'int'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |location|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f38156ca0>|, |urls: "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+|, |urls: "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+|; types: |<class 'dataset_info_pb2.DatasetLocation'>|, |<class 'dataset_info_pb2.DatasetLocation'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |download_checksums|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f38156a90>|, |{}|, |{}|; types: |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|, |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |schema|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f381562b0>|, ||, ||; types: |<class 'tensorflow_metadata.proto.v0.schema_pb2.Schema'>|, |<class 'tensorflow_metadata.proto.v0.schema_pb2.Schema'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |splits|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f381566a0>|, |[name: "train"
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+num_bytes: 607083635
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+, name: "test"
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+num_bytes: 587077607
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+]|, |[name: "train"
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+num_bytes: 607083635
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+, name: "test"
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+num_bytes: 587077607
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+]|; types: |<class 'google.protobuf.pyext._message.RepeatedCompositeContainer'>|, |<class 'google.protobuf.pyext._message.RepeatedCompositeContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |supervised_keys|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f38156d90>|, |tuple {
+  items {
+    feature_key: "image"
+  }
+  items {
+    feature_key: "label"
+  }
+}
+|, |tuple {
+  items {
+    feature_key: "image"
+  }
+  items {
+    feature_key: "label"
+  }
+}
+|; types: |<class 'dataset_info_pb2.SupervisedKeys'>|, |<class 'dataset_info_pb2.SupervisedKeys'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |redistribution_info|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f38156ac0>|, ||, ||; types: |<class 'dataset_info_pb2.RedistributionInfo'>|, |<class 'dataset_info_pb2.RedistributionInfo'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |module_name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f381569d0>|, |tensorflow_datasets.image_classification.caltech_birds|, |tensorflow_datasets.image_classification.caltech_birds|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |disable_shuffling|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f38156c10>|, |False|, |False|; types: |<class 'bool'>|, |<class 'bool'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |file_format|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f38156bb0>|, ||, |tfrecord|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: DatasetBuilder: init() step_2.1 END!...
+DBG: DatasetBuilder: init() finished!
+.1.5
+.1.6
+.1.7
+.2
+.3
+.4
+### Start training...
+RUNID: CUB200_Traditional_TL
+epoch 1/12: 100%|#######################################################################################################| 1499/1499 [1:11:29<00:00,  2.86s/it]
+per epoch time(s) excluding validation: 4289.68906378746
+=================================
+acc:  tf.Tensor(0.07991025, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 8224.158642292023
+epoch 2/12: 100%|#######################################################################################################| 1499/1499 [1:10:31<00:00,  2.82s/it]
+per epoch time(s) excluding validation: 4231.081760168076
+=================================
+acc:  tf.Tensor(0.18743528, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 8160.021991014481
+epoch 3/12: 100%|#######################################################################################################| 1499/1499 [1:11:24<00:00,  2.86s/it]
+per epoch time(s) excluding validation: 4284.798765420914
+=================================
+acc:  tf.Tensor(0.26458406, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 8377.118364572525
+epoch 4/12: 100%|#######################################################################################################| 1499/1499 [1:15:22<00:00,  3.02s/it]
+per epoch time(s) excluding validation: 4522.392521858215
+=================================
+acc:  tf.Tensor(0.31877804, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 8414.810737848282
+epoch 5/12: 100%|#######################################################################################################| 1499/1499 [1:07:55<00:00,  2.72s/it]
+per epoch time(s) excluding validation: 4075.012763261795
+=================================
+acc:  tf.Tensor(0.35985503, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 7859.431556224823
+epoch 6/12: 100%|#######################################################################################################| 1499/1499 [1:09:20<00:00,  2.78s/it]
+per epoch time(s) excluding validation: 4160.334231376648
+=================================
+acc:  tf.Tensor(0.3871246, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 8024.905109405518
+epoch 7/12: 100%|#######################################################################################################| 1499/1499 [1:10:00<00:00,  2.80s/it]
+per epoch time(s) excluding validation: 4200.70833158493
+=================================
+acc:  tf.Tensor(0.40610978, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 8067.51224899292
+epoch 8/12: 100%|#######################################################################################################| 1499/1499 [1:09:12<00:00,  2.77s/it]
+per epoch time(s) excluding validation: 4152.400633096695
+=================================
+acc:  tf.Tensor(0.41681048, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 7968.822829961777
+epoch 9/12: 100%|#######################################################################################################| 1499/1499 [1:10:01<00:00,  2.80s/it]
+per epoch time(s) excluding validation: 4201.200150489807
+=================================
+acc:  tf.Tensor(0.42751122, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 7883.534299373627
+epoch 10/12: 100%|######################################################################################################| 1499/1499 [1:05:13<00:00,  2.61s/it]
+per epoch time(s) excluding validation: 3913.2972753047943
+=================================
+acc:  tf.Tensor(0.42923713, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 7521.512010097504
+epoch 11/12: 100%|######################################################################################################| 1499/1499 [1:06:41<00:00,  2.67s/it]
+per epoch time(s) excluding validation: 4001.2303218841553
+=================================
+acc:  tf.Tensor(0.43165344, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 7740.814090967178
+epoch 12/12: 100%|######################################################################################################| 1499/1499 [1:11:17<00:00,  2.85s/it]
+per epoch time(s) excluding validation: 4277.852113246918
+=================================
+acc:  tf.Tensor(0.43217123, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 8230.301312446594
+===============================================
+Training Type: Traditional TL
+Accuracy (%): 43.22
+Time (h): 13.97
+===============================================
+### Porting NN model...
+### Porting dataset...
+.1
+...entering load.builder()...0.0, name: caltech_birds2011
+load.builder()...0.1, kwargs: {'data_dir': None}
+load.builder()...0.2
+load.builder()...0.3
+load.builder()... 0.3+: before builder_cls()
+builder_cls(): 0
+builder_cls(): 1
+builder_cls(): 3
+imported_builder_cls: (): 0.0 name is : caltech_birds2011
+load.builder()... 0.3+: after builder_cls(), cls is: <class 'tensorflow_datasets.image_classification.caltech_birds.CaltechBirds2011'>
+load.builder()...0.4
+load.builder()...0.5: before call cls()...
+load.builder()...0.5: type of cls is: <class 'abc.ABCMeta'>
+load.builder()...0.5: builder_kwargs is: {'data_dir': None}
+DBG: DatasetBuilder: init()...
+DBG: DatasetBuilder: init() step_2...
+DBG: DatasetBuilder: init() step_2.1 ...
+DBG: DatasetBuilder: self._data_dir is: /home/kah295/tensorflow_datasets/caltech_birds2011/0.1.1
+DBG: read_from_dir(): before loading metadata...
+DBG: read_from_dir(): v2 ...
+DBG: read_from_dir(): v3 ...
+DBG: read_from_dir(): v4 ...
+DBG: read_from_dir(): v5 ...
+DBG: read_from_dir(): v6 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f7420fe50>|, |caltech_birds2011|, |caltech_birds2011|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |description|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f74314c10>|, |Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos 
+of 200 bird species (mostly North American). The total number of 
+categories of birds is 200 and there are 6033 images in the 2010 
+dataset and 11,788 images in the 2011 dataset.
+Annotations include bounding boxes, segmentation labels.|, |Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos 
+of 200 bird species (mostly North American). The total number of 
+categories of birds is 200 and there are 6033 images in the 2010 
+dataset and 11,788 images in the 2011 dataset.
+Annotations include bounding boxes, segmentation labels.|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |version|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f743144c0>|, |0.1.1|, |0.1.1|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |release_notes|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f74314820>|, |{}|, |{}|; types: |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|, |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |config_name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f74389b80>|, ||, ||; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |config_description|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f743898b0>|, ||, ||; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |features|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e1970>|, ||, ||; types: |<class 'feature_pb2.Feature'>|, |<class 'feature_pb2.Feature'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |citation|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e1c10>|, |@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}|, |@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |size_in_bytes|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e1bb0>|, |0|, |0|; types: |<class 'int'>|, |<class 'int'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |download_size|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e1ee0>|, |0|, |1189858222|; types: |<class 'int'>|, |<class 'int'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |location|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e17c0>|, |urls: "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+|, |urls: "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+|; types: |<class 'dataset_info_pb2.DatasetLocation'>|, |<class 'dataset_info_pb2.DatasetLocation'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |download_checksums|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e1a00>|, |{}|, |{}|; types: |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|, |<class 'google.protobuf.pyext._message.ScalarMapContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |schema|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e18b0>|, ||, ||; types: |<class 'tensorflow_metadata.proto.v0.schema_pb2.Schema'>|, |<class 'tensorflow_metadata.proto.v0.schema_pb2.Schema'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |splits|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e1f70>|, |[name: "train"
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+num_bytes: 607083635
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+, name: "test"
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+num_bytes: 587077607
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+]|, |[name: "train"
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+shard_lengths: 750
+shard_lengths: 749
+shard_lengths: 749
+num_bytes: 607083635
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+, name: "test"
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+shard_lengths: 725
+shard_lengths: 724
+shard_lengths: 724
+num_bytes: 587077607
+filepath_template: "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+]|; types: |<class 'google.protobuf.pyext._message.RepeatedCompositeContainer'>|, |<class 'google.protobuf.pyext._message.RepeatedCompositeContainer'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |supervised_keys|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e1ca0>|, |tuple {
+  items {
+    feature_key: "image"
+  }
+  items {
+    feature_key: "label"
+  }
+}
+|, |tuple {
+  items {
+    feature_key: "image"
+  }
+  items {
+    feature_key: "label"
+  }
+}
+|; types: |<class 'dataset_info_pb2.SupervisedKeys'>|, |<class 'dataset_info_pb2.SupervisedKeys'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |redistribution_info|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e1a90>|, ||, ||; types: |<class 'dataset_info_pb2.RedistributionInfo'>|, |<class 'dataset_info_pb2.RedistributionInfo'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |module_name|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e17f0>|, |tensorflow_datasets.image_classification.caltech_birds|, |tensorflow_datasets.image_classification.caltech_birds|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #2.1 ...
+DBG: read_from_dir(): v7 loop #2.3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |disable_shuffling|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e16a0>|, |False|, |False|; types: |<class 'bool'>|, |<class 'bool'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: read_from_dir(): v7 loop ...
+DBG: field_name, field, field_value, field_value_restored: |file_format|, |<google.protobuf.pyext._message.FieldDescriptor object at 0x7f741e1d90>|, ||, |tfrecord|; types: |<class 'str'>|, |<class 'str'>|
+DBG: read_from_dir(): v7 loop #2 ...
+DBG: read_from_dir(): v7 loop #3 ...
+DBG: DatasetBuilder: init() step_2.1 END!...
+DBG: DatasetBuilder: init() finished!
+.1.5
+.1.6
+.1.7
+.2
+.3
+.4
+### Start training...
+RUNID: CUB200_BN+Bias
+epoch 1/12: 100%|#######################################################################################################| 1499/1499 [2:48:55<00:00,  6.76s/it]
+per epoch time(s) excluding validation: 10135.988312959671
+=================================
+acc:  tf.Tensor(0.0517777, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 14209.23045873642
+epoch 2/12: 100%|#######################################################################################################| 1499/1499 [2:37:22<00:00,  6.30s/it]
+per epoch time(s) excluding validation: 9442.551430940628
+=================================
+acc:  tf.Tensor(0.15360717, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 13072.061528921127
+epoch 3/12: 100%|#######################################################################################################| 1499/1499 [2:32:20<00:00,  6.10s/it]
+per epoch time(s) excluding validation: 9140.601435184479
+=================================
+acc:  tf.Tensor(0.2947877, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 12925.469017267227
+epoch 4/12: 100%|#######################################################################################################| 1499/1499 [2:34:52<00:00,  6.20s/it]
+per epoch time(s) excluding validation: 9292.321548223495
+=================================
+acc:  tf.Tensor(0.4007594, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 12864.99327802658
+epoch 5/12: 100%|#######################################################################################################| 1499/1499 [2:24:00<00:00,  5.76s/it]
+per epoch time(s) excluding validation: 8640.39314198494
+=================================
+acc:  tf.Tensor(0.46979633, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 12004.984955310822
+epoch 6/12: 100%|#######################################################################################################| 1499/1499 [2:26:02<00:00,  5.85s/it]
+per epoch time(s) excluding validation: 8762.26676106453
+=================================
+acc:  tf.Tensor(0.50604075, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 12579.198890924454
+epoch 7/12: 100%|#######################################################################################################| 1499/1499 [2:43:22<00:00,  6.54s/it]
+per epoch time(s) excluding validation: 9802.031884431839
+=================================
+acc:  tf.Tensor(0.53279257, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 13745.787690877914
+epoch 8/12: 100%|#######################################################################################################| 1499/1499 [2:41:42<00:00,  6.47s/it]
+per epoch time(s) excluding validation: 9702.982408285141
+=================================
+acc:  tf.Tensor(0.55298585, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 13498.143816947937
+epoch 9/12: 100%|#######################################################################################################| 1499/1499 [2:33:08<00:00,  6.13s/it]
+per epoch time(s) excluding validation: 9188.15993142128
+=================================
+acc:  tf.Tensor(0.5617881, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 12882.393729686737
+epoch 10/12: 100%|######################################################################################################| 1499/1499 [2:35:59<00:00,  6.24s/it]
+per epoch time(s) excluding validation: 9359.319691181183
+=================================
+acc:  tf.Tensor(0.56903696, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 13194.54304099083
+epoch 11/12: 100%|######################################################################################################| 1499/1499 [2:42:32<00:00,  6.51s/it]
+per epoch time(s) excluding validation: 9752.225957155228
+=================================
+acc:  tf.Tensor(0.5707629, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 13782.050109624863
+epoch 12/12: 100%|######################################################################################################| 1499/1499 [2:45:23<00:00,  6.62s/it]
+per epoch time(s) excluding validation: 9923.770240783691
+=================================
+acc:  tf.Tensor(0.5716258, shape=(), dtype=float32)
+=================================
+per epoch time(s) including validation: 13888.689442157745
+===============================================
+Training Type: BN+Bias
+Accuracy (%): 57.16
+Time (h): 31.43
+===============================================
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+(venv) kah295@raspberrypi:~/src/ElasticTrainer $ 

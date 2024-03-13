@@ -1,0 +1,10 @@
+*.png
+img/
+NLP/
+数据集/
+模型/
+模型们/
+tensorboard/
+模式识别期末报告模板（完整带封面）/
+THUCNews/
+*.pdf

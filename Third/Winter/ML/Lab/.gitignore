@@ -1,0 +1,19 @@
+# 缓存文件
+**/__pycache__/
+
+# 数据集/训练模型
+/Lab5/data/
+
+# 报告模板
+**/SHU-Lab-Report-Template/
+**/report/
+
+# 示例代码
+/machinelearninginaction/
+/ML-NLP/
+/MLBox/
+
+*.html
+*.png
+
+机器学习基础/

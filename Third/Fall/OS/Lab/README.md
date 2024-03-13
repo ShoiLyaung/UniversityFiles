@@ -1,0 +1,5 @@
+1. [week1](week1.md)
+2. [week2](week2.md)
+7. [week7](week7/README.md)
+8. [week8](week8/README.md)
+9. [week9](week9/README.md)

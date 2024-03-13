@@ -1,0 +1,12 @@
+{
+  "accentColor": "",
+  "baseFontSize": 16,
+  "theme": "system",
+  "cssTheme": "",
+  "translucency": false,
+  "nativeMenus": true,
+  "enabledCssSnippets": [
+    "fix_overline"
+  ],
+  "monospaceFontFamily": "MesloLGS NF"
+}
