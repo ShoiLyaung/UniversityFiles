@@ -1,6 +1,5 @@
 [
   "templater-obsidian",
-  "obsidian-day-planner",
   "heatmap-calendar",
   "dataview",
   "obsidian-full-calendar",
@@ -8,5 +7,7 @@
   "table-editor-obsidian",
   "easy-typing-obsidian",
   "obsidian-electron-window-tweaker",
-  "obsidian-git"
+  "obsidian-git",
+  "obsidian-excalidraw-plugin",
+  "global-proxy"
 ]
